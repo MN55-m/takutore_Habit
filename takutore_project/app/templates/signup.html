@@ -4,18 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>宅トレ★Habit</title>
+<!-- CSSスタイル定義 -->
+<style>
+    /* ページ全体のフォントとテキスト配置 */
+    body {
+        font-family: Arial, sans-serif; /* フォントを指定 */
+        text-align: center; /* コンテンツを中央揃えに */
+    }
+
+    /* ページタイトルのスタイリング */
+    h1 {
+        font-size: 24px; /* タイトルのフォントサイズ */
+    }
+
+    /* サブタイトルのスタイリング */
+    h2 {
+        font-size: 16px; /* サブタイトルのフォントサイズ */
+        margin-bottom: 20px; /* 下に余白を追加 */
+    }
+
+    /* 入力フィールドのスタイル */
+    .form-group {
+         display: flex;
+         align-items: center; /* ラベルと入力欄を垂直方向で中央揃え */
+         gap: 15px; /* ラベルと入力欄の間を調整 */
+         margin-bottom: 15px;
+    }
+
+    .form-group label {
+         width: 550px; /* ラベルの固定幅 */
+         text-align: right; /* ラベルを右揃え */
+    }
+
+    .form-group input {
+         flex: 0; /* 入力欄が余ったスペースを埋める */
+         padding: 5px;
+         border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    /* ボタンをまとめるコンテナのスタイリング */
+    .button-container {
+        display: flex; /* ボタンを横並びに配置 */
+        justify-content: center; /* コンテナ内の要素を中央揃え */
+        gap: 20px; /* ボタン同士の間隔を20pxに設定 */
+        margin-top: 20px; /* 上に余白を追加 */
+    }
+
+    /* ボタンのデザイン */
+    button {
+        padding: 10px 20px; /* ボタンの内側の余白 */
+        font-size: 16px; /* ボタン内のテキストサイズ */
+        cursor: pointer; /* マウスポインタを「クリックできる状態」に変更 */
+    }
+</style>
 </head>
 <body>
     <h1>新規登録画面</h1>
     <form method="post">
         {% csrf_token %}
-        <div>名前<input type="text" name="username"></div>
-        <div>メールアドレス<input type="email" name="email"></div>
-        <div>パスワード<input type="password" name="password1"></div>
-        <div>確認用パスワード<input type="password" name="password2"></div>
+        <div class="form-group"><label for="username">ユーザー名</label><input type="text" name="username"></div>
+        <div class="form-group"><label for="email">mail</label><input type="email" name="email"></div>
+        <div class="form-group"><label for="password">password</label><input type="password" name="password1"></div>
+        <div class="form-group"><label for="password">password(確認)</label><input type="password" name="password2"></div>
+        <div class="form-group"><label for="height">身長</label><input type="height" name="height"></div>
+        <div class="form-group"><label for="weight">体重</label><input type="weight" name="weight"></div>
         <button type="submit">登録</button>
     </form>
+
     {{ form.errors }}
-    <a href="{% url 'login' %}">ログインに戻る</a>
+    <div class="button-container"> <!-- ボタン配置 -->
+        <!-- ログイン画面へ戻るボタン -->
+        <a href="{% url 'login' %}">
+            <button type="submit">ログイン画面へ戻る</button>
+        </a>
+      </div>  
 </body>
 </html>
