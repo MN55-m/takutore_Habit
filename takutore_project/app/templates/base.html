@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}宅トレ★Habit{% endblock %}</title>
+    <!-- ナビゲーションバー全体のスタイル　　：.navbar         -->
+    <!-- 各リンクのスタイル　　　　　　　　　：.navbar a       -->
+    <!-- 最後の「ログアウト」のボタンスタイル：.navbar .logout -->
+    <!-- ホバー時の背景色　　　　　　　　　　：.navbar a:hover -->
+    <style>
+        .navbar {
+            display: flex;
+            background-color: #87CEEB;
+            padding: 10px;
+            align-items: center;
+        }
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            padding: 8px 16px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .navbar .logout {
+            margin-left: auto;
+            border: 1px solid black;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .navbar a:hover {
+            background-color: #add8e6;
+        }
+    </style>
+</head>
+<body>
+     <!-- ナビゲーションバーをインクルード -->
+    {% include 'navbar.html' %}
+     <!-- 各ページのコンテンツ部分 -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

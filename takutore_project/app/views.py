@@ -45,3 +45,28 @@ class HomeView(LoginRequiredMixin, View):
     login_url = "login"
     def get(self, request):
         return render(request, "home.html")
+
+class CalendarView(LoginRequiredMixin, View):
+    login_url = "login"
+    def get(self, request):
+        return render(request, "calendar.html")
+
+class Video_registerView(LoginRequiredMixin, View):
+    login_url = "login"
+    def get(self, request):
+        return render(request, "video_register.html")
+
+class Video_listView(LoginRequiredMixin, View):
+    login_url = "login"
+    def get(self, request):
+        return render(request, "video_list.html")
+
+class Workout_settingsView(LoginRequiredMixin, View):
+    login_url = "login"
+    def get(self, request):
+        return render(request, "workout_settings.html")
+
+class MypageView(LoginRequiredMixin, View):
+    login_url = "login"
+    def get(self, request):
+        return render(request, "mypage.html")
