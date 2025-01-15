@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 class SignupForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ["username", "email", "password1", "password2"]
+        fields = ["username", "email", "password1", "password2", "height", "weight"]
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -27,3 +27,5 @@ class LoginForm(forms.Form):
         if self.user is None:
             raise forms.ValidationError("認証に失敗しました")
         return self.cleaned_data
+
+

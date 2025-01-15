@@ -1,9 +1,43 @@
 <!DOCTYPE html>
 {% extends 'base.html' %}  <!-- base.htmlを継承 -->
 
-{% block title %}HOME{% endblock %}  <!-- ページタイトルを設定 -->
+{% block title %}マイページ{% endblock %}  <!-- ページタイトルを設定 -->
 
 {% block content %}
 <h1>マイページ</h1>
-<p>ここはHOMEページです。</p>
+<!-- マイページ専用スタイルの追加 -->
+<style>
+    table {
+        width: 50%;
+        border-collapse: collapse;
+        margin: 20px auto;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+</style>
+
+<table>
+    <tr>
+        <th>ユーザー名</th>
+        <td></td>
+    </tr>
+    <tr>
+        <th>mail</th>
+        <td>test@test.com</td>
+    </tr>
+    <tr>
+        <th>身長</th>
+        <td></td>
+    </tr>
+    <tr>
+        <th>体重</th>
+        <td>kg</td>
+    </tr>
+</table>
 {% endblock %}
