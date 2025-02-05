@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}  <!-- base.htmlを継承 -->
+
+{% block title %}マイページの変更{% endblock %}  <!-- ページタイトルを設定 -->
+
+{% block content %}
+<style>
+      button {
+          padding: 10px 20px; /* ボタンの内側の余白 */
+          font-size: 16px; /* ボタン内のテキストサイズ */
+          cursor: pointer; /* マウスポインタを「クリックできる状態」に変更 */
+      }
+</style>
+
+<div style="text-align: center;">
+    <h2>マイページの変更</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table style="margin: 0 auto; text-align: left;">
+            {% for field in form %}
+                <tr>
+                    <td style="padding-right: 10px;">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    </td>
+                    <td>
+                        {{ field }} 
+                        {% if field.name == 'height' %}
+                            <span>cm</span> <!-- 身長の単位 -->
+                        {% elif field.name == 'weight' %}
+                            <span>kg</span> <!-- 体重の単位 -->
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <button type="submit">保存</button>
+    </form>
+</div>
+{% endblock %}

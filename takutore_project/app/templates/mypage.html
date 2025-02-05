@@ -25,19 +25,25 @@
 <table>
     <tr>
         <th>ユーザー名</th>
-        <td></td>
+        <td>{{ user_data.username }}</td>
     </tr>
     <tr>
         <th>mail</th>
-        <td>test@test.com</td>
+        <td>{{ user_data.email }}</td>
     </tr>
     <tr>
         <th>身長</th>
-        <td></td>
+        <td>{{ user_data.height }} cm</td>
     </tr>
     <tr>
         <th>体重</th>
-        <td>kg</td>
+        <td>{{ user_data.weight }} kg</td>
     </tr>
 </table>
+
+<div style="text-align: center;">
+    <a href="{% url 'mypage_edit' %}">マイページの変更</a><br><br>
+    <a href="{% url 'password_change' %}">ログインパスワードの変更</a>
+</div>
+
 {% endblock %}
