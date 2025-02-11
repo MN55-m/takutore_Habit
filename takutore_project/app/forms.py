@@ -1,7 +1,8 @@
 from django import forms  # Djangoのフォーム機能をインポート
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
-from django.contrib.auth.models import User # 作成したモデルをインポート
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
+
+User = get_user_model()  # カスタムユーザーモデルを取得
 
 #新規アカウント登録
 class SignupForm(UserCreationForm):
@@ -44,19 +45,19 @@ class MypageForm(forms.ModelForm):
 
 #パスワード
 class PasswordChangeForm(PasswordChangeForm):
+    # パスワードを入力するためのフィールド
+    # PasswordInputはパスワードを非表示にして表示する
     old_password = forms.CharField(
         label="現在のパスワード", 
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'readonly': 'readonly'})
-    )
+        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password'}))
     new_password1 = forms.CharField(
         label="新しいパスワード", 
-        widget=forms.PasswordInput(attrs={'class': 'form-control'})
-    )
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}))
     new_password2 = forms.CharField(
         label="新しいパスワード（確認）", 
-        widget=forms.PasswordInput(attrs={'class': 'form-control'})
-    )
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}))
 
+    # フォームで使用するモデルとフィールドを設定
     class Meta:
-        model = User
-        fields = ['old_password', 'new_password1', 'new_password2']
+        model = User # Userモデルを使って、ユーザー情報を管理
+        fields = ['old_password', 'new_password1', 'new_password2']  # 使用するフィールド

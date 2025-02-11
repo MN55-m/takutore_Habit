@@ -2,8 +2,13 @@ from django.shortcuts import render, redirect  # HTMLテンプレートのレン
 from django.views import View  # クラスベースビューを利用するためのインポート
 from django.contrib.auth import login, update_session_auth_hash  # ユーザーをログイン状態にするための関数
 from django.contrib.auth.mixins import LoginRequiredMixin  # ログインが必要なビューを作成するためのミックスイン
-from django.contrib.auth.models import User # DBモデルをインポート
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from app.forms import SignupForm, LoginForm, MypageForm, PasswordChangeForm  # 作成したフォームをインポート
+from django.contrib.auth import get_user_model
+from django.urls import reverse_lazy
+
+User = get_user_model()  # カスタムユーザーモデルを取得
 
 # Create your views here.
 
@@ -91,16 +96,22 @@ class MyPageEditView(LoginRequiredMixin, View):
 
 
 #パスワードの変更ビュー（ログインが必要）
-class PasswordChangeView(LoginRequiredMixin, View):
+class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     login_url = "login"
-    def get(self, request):
-        form = PasswordChangeForm(user=request.user)  # パスワード変更フォームを取得
-        return render(request, 'password_change.html', {'form': form})
+    form_class = PasswordChangeForm  # 使用するフォームを指定
+    template_name = 'password_change.html'  # パスワードの変更画面
+    success_url = reverse_lazy('mypage')    # # パスワード変更成功後にリダイレクトするURL（マイページ）
 
-    def post(self, request):
-        form = PasswordChangeForm(user=request.user, data=request.POST)
-        if form.is_valid():
-            form.save()  # パスワードを更新
-            update_session_auth_hash(request, form.user)  # セッションの認証情報を更新（再ログイン防止）
-            return redirect('mypage')  # パスワード変更成功後、マイページにリダイレクト
-        return render(request, 'password_change.html', {'form': form})
+    # フォームが正常に送信され、バリデーションが通った場合(form_valid)
+    def form_valid(self, form):
+        # ユーザー情報を保存してパスワードを変更
+        user = form.save()  
+        # セッションの認証情報を更新（新しいパスワードをセッションに反映させる）
+        update_session_auth_hash(self.request, user)
+        # 成功後、マイページにリダイレクト
+        return redirect(self.success_url)
+    
+    # フォームが無効な場合（エラーが発生した場合）(form_invalid)
+    def form_invalid(self, form):
+        # エラーがあった場合は、同じページに戻り、エラーメッセージを表示
+        return super().form_invalid(form)
