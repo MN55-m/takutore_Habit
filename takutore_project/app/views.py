@@ -4,6 +4,8 @@ from django.contrib.auth import login, update_session_auth_hash  # ユーザー�
 from django.contrib.auth.mixins import LoginRequiredMixin  # ログインが必要なビューを作成するためのミックスイン
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib import messages
+from django.shortcuts import redirect
 from app.forms import SignupForm, LoginForm, MypageForm, PasswordChangeForm  # 作成したフォームをインポート
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
@@ -108,10 +110,13 @@ class PasswordChangeView(LoginRequiredMixin, PasswordChangeView):
         user = form.save()  
         # セッションの認証情報を更新（新しいパスワードをセッションに反映させる）
         update_session_auth_hash(self.request, user)
+        # 成功メッセージを追加
+        messages.success(self.request, "パスワードが正常に変更されました。")
         # 成功後、マイページにリダイレクト
         return redirect(self.success_url)
     
     # フォームが無効な場合（エラーが発生した場合）(form_invalid)
     def form_invalid(self, form):
         # エラーがあった場合は、同じページに戻り、エラーメッセージを表示
+        messages.error(self.request, "パスワードの変更に失敗しました。入力内容を確認してください。")
         return super().form_invalid(form)

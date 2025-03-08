@@ -24,29 +24,37 @@
           margin-bottom: 20px; /* 下に余白を追加 */
       }
 
+    /* フォーム全体を中央配置 */
+      .form-container {
+          width: 300px; /* フォームの幅を指定 */
+          margin: 0 auto; /* 中央に配置 */
+          text-align: left; /* フォーム内のテキストを左寄せ */
+          padding: 20px;
+          border: 1px solid #ccc; /* 枠線をつける（不要なら削除） */
+          border-radius: 5px;
+          background-color: #f9f9f9; /* 背景色をつける（不要なら削除） */
+      }
+
      /* 入力フィールドのスタイル */
       .form-group {
-          display: flex;
-          align-items: center; /* ラベルと入力欄を垂直方向で中央揃え */
-          gap: 15px; /* ラベルと入力欄の間を調整 */
           margin-bottom: 15px;
       }
 
       .form-group label {
-          width: 550px; /* ラベルの固定幅 */
-          text-align: right; /* ラベルを右揃え */
+          display: block; /* ラベルをブロック要素に */
+          margin-bottom: 5px; /* ラベルと入力欄の間のスペース */
       }
 
       .form-group input {
-          flex: 0; /* 入力欄が余ったスペースを埋める */
-          padding: 5px;
+          width: 250px; /* 入力欄の幅 */
+          padding: 8px;
           border: 1px solid #ccc;
           border-radius: 4px;
       }
 
     /* ボタンをまとめるコンテナのスタイリング */
       .button-container {
-          display: center; /* ボタンを横並びに配置 */
+          display: flex;
           justify-content: center; /* コンテナ内の要素を中央揃え */
           gap: 20px; /* ボタン同士の間隔を20pxに設定 */
           margin-top: 20px; /* 上に余白を追加 */
@@ -57,6 +65,14 @@
           padding: 10px 20px; /* ボタンの内側の余白 */
           font-size: 16px; /* ボタン内のテキストサイズ */
           cursor: pointer; /* マウスポインタを「クリックできる状態」に変更 */
+          border: none;
+          background-color: #007BFF;
+          color: white;
+          border-radius: 5px;
+      }
+
+      button:hover {
+          background-color: #0056b3;
       }
     </style>
 </head>
