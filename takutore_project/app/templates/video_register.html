@@ -1,9 +1,122 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}  <!-- base.htmlを継承 -->
 
-{% block title %}HOME{% endblock %}  <!-- ページタイトルを設定 -->
+{% block title %}宅トレ★動画の登録{% endblock %}  <!-- ページタイトルを設定 -->
 
 {% block content %}
-<h1>宅トレ★動画登録</h1>
-<p>ここはHOMEページです。</p>
+    <title>宅トレ★動画の登録</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+        /* ボタンを中央寄せするためのコンテナ */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 12px 24px;
+            background-color:rgba(52, 78, 171, 0.59);  /* 青色 */
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color:rgba(1, 8, 14, 0.4);  /* 濃い青 */
+        }
+    </style>
+
+
+    <div class="container">
+        <h2>宅トレ★動画登録</h2>
+
+        <!-- フラッシュメッセージの表示（エラーや成功メッセージ） -->
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <!-- 動画登録フォーム -->
+        <form method="post">
+            {% csrf_token %}  <!-- CSRF対策（セキュリティ対策のため必須） -->
+
+            {% if form.non_field_errors %}
+              <div class="error">
+                {% for error in form.non_field_errors %}
+                  <p>{{ error }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <!-- 時間帯（朝トレ・夜トレ） -->
+            <label for="id_time_category">時間帯</label>
+            {{ form.time_category }}
+
+            <!-- トレーニング種別 -->
+            <label for="id_type_category">トレーニング種別</label>
+            {{ form.type_category }}
+
+            <!-- 部位カテゴリ -->
+            <label for="id_body_part_category">部位</label>
+            {{ form.body_part_category }}
+
+            <!-- 動画時間（MM:SS 形式） -->
+            <label for="id_duration_seconds">動画時間 (MM:SS)</label>
+            {{ form.duration_time }}
+            {% if form.duration_time.errors %}
+              <div class="error">
+                {% for error in form.duration_time.errors %}
+                  <p>{{ error }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <!-- YouTuber名 -->
+            <label for="id_youtuber_name">YouTuber名</label>
+            {{ form.youtuber_name }}
+
+            <!-- 動画URL -->
+            <label for="id_url">動画埋め込みURL</label>
+            {{ form.url }}
+
+            <!-- メモ -->
+            <label for="id_memo">メモ</label>
+            {{ form.memo }}
+
+            <!-- 送信ボタン -->
+            <div class="button-container">
+              <button type="submit" class="button">登録</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
