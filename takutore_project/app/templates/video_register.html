@@ -2,6 +2,7 @@
 
 {% block title %}宅トレ★動画の登録{% endblock %}  <!-- ページタイトルを設定 -->
 
+
 {% block content %}
     <title>宅トレ★動画の登録</title>
     <style>
@@ -53,7 +54,24 @@
         .button:hover {
             background-color:rgba(1, 8, 14, 0.4);  /* 濃い青 */
         }
+
+         /* チェックボックスをボックス内に配置 */
+        .checkbox-box {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+            background-color: #f3f3f3;
+        }
+        .checkbox-box label {
+            margin-left: 5px;
+        }
     </style>
+
+    <!-- Select2 CSS & JS 読み込み -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
     <div class="container">
@@ -79,19 +97,19 @@
             {% endif %}
 
             <!-- 時間帯（朝トレ・夜トレ） -->
-            <label for="id_time_category">時間帯</label>
+            <label for="id_time_category">◆時間帯 (複数選択可)</label>
             {{ form.time_category }}
 
             <!-- トレーニング種別 -->
-            <label for="id_type_category">トレーニング種別</label>
+            <label for="id_type_category">◆トレーニング種別 (複数選択可)</label>
             {{ form.type_category }}
 
             <!-- 部位カテゴリ -->
-            <label for="id_body_part_category">部位</label>
+            <label for="id_body_part_category">◆部位</label>
             {{ form.body_part_category }}
 
             <!-- 動画時間（MM:SS 形式） -->
-            <label for="id_duration_seconds">動画時間 (MM:SS)</label>
+            <label for="id_duration_seconds">◆動画時間 (MM:SS)</label>
             {{ form.duration_time }}
             {% if form.duration_time.errors %}
               <div class="error">
@@ -102,15 +120,15 @@
             {% endif %}
 
             <!-- YouTuber名 -->
-            <label for="id_youtuber_name">YouTuber名</label>
+            <label for="id_youtuber_name">◆YouTuber名</label>
             {{ form.youtuber_name }}
 
             <!-- 動画URL -->
-            <label for="id_url">動画埋め込みURL</label>
+            <label for="id_url">◆動画埋め込みURL</label>
             {{ form.url }}
 
             <!-- メモ -->
-            <label for="id_memo">メモ</label>
+            <label for="id_memo">◆メモ</label>
             {{ form.memo }}
 
             <!-- 送信ボタン -->
@@ -119,4 +137,13 @@
             </div>
         </form>
     </div>
+
+    <script>
+      $(document).ready(function() {
+        // Select2 を適用
+        $('#id_time_category').select2();
+        $('#id_type_category').select2();
+        $('#id_body_part_category').select2();
+      });
+    </script>
 {% endblock %}

@@ -1,0 +1,134 @@
+/* ===== 検索フォームエリア ===== */
+.search-container {
+  display: flex;
+  justify-content: center;   /* 中央寄せ */
+  margin-bottom: 50px;       /* 一覧表との間に余白 */
+  border: 1px solid #ccc;  /* ← 枠線を追加 */
+  padding: 20px;           /* ← 内側の余白を追加 */
+  border-radius: 8px;       /* ← 角を丸める（任意） */
+  background-color: #f9f9f9; /* ← 薄い背景色（任意） */
+  width: 90%;              /* ← 追加: テーブルと同じ幅に */
+  margin: 0 auto 20px;     /* ← 追加: 中央寄せ */
+  box-sizing: border-box;  /* ← 枠線含めて幅調整 */
+}
+
+.search-container form {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-end;
+  width: 90%;
+  max-width: 1000px;
+}
+
+.search-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-item label {
+  font-weight: bold;
+  margin-bottom: 4px;
+  text-align: left;
+  min-height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.search-item select {
+  min-width: 180px; 
+  width: 100%;
+  padding: 4px;
+  box-sizing: border-box; /* padding含めた幅調整 */
+}
+
+.search-item input {
+  width: 250px;
+  padding: 4px;
+  box-sizing: border-box; /* padding含めた幅調整 */
+  height: 31px
+}
+
+.search-item button {
+  background-color: rgb(14, 144, 210);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 100px;
+  padding: 6px 12px;
+  margin-top: 20px;
+}
+
+.search-title {
+  font-weight: bold;
+  font-size: 1.2em;   /* 好きなサイズに */
+  margin-bottom: 70px;
+}
+
+
+/* ===== 一覧表エリア ===== */
+table {
+  border-collapse: collapse;
+  width: 90%;
+  margin: 0 auto;            /* 中央寄せ */
+  border: 1px solid #ccc; /* テーブル全体の枠線 */
+}
+
+th, td {
+  border: 1px solid #ccc; /* 各セルの線 */
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle; /* 縦方向中央寄せ */
+}
+
+th {
+  background-color: #f0f0f0;
+}
+
+td iframe {
+  width: 250px;
+  height: 140px;
+}
+
+/* 各列の幅 */
+th:nth-child(1), td:nth-child(1) { width: 80px; }
+th:nth-child(2), td:nth-child(2) { width: 100px; }
+th:nth-child(3), td:nth-child(3) { width: 80px; }
+th:nth-child(4), td:nth-child(4) { width: 80px; }
+th:nth-child(5), td:nth-child(5) { width: 100px; }
+th:nth-child(6), td:nth-child(6) { width: 120px; }
+th:nth-child(7), td:nth-child(7) { width: 300px; }
+th:nth-child(8), td:nth-child(8) { width: 100px; }
+
+/* 編集・削除ボタン */
+/* ボタンを完全に中央寄せする用 */
+td.button-cell {
+  padding: 8px;
+  text-align: center; /* 横方向中央 */
+  vertical-align: middle; /* 縦方向中央 */
+}
+
+/* 中のdivをflexにする */
+.button-wrapper {
+  display: flex;
+  justify-content: center; /* 横方向中央 */
+  align-items: center;     /* 縦方向中央 */
+  gap: 8px;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 3px 9px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}
+
+
+  
