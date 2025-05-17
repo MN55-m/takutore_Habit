@@ -1,9 +1,77 @@
-<!DOCTYPE html>
-{% extends 'base.html' %}  <!-- base.htmlを継承 -->
+{% extends 'base.html' %}
 
-{% block title %}カレンダー{% endblock %}  <!-- ページタイトルを設定 -->
+{% load custom_filters %}
+
+{% block title %}カレンダー{% endblock %}
+
+{% block extra_css %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'app_calendar/styles_calendar.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>カレンダー</h1>
-<p>ここはHOMEページです。</p>
+<h2>カレンダー機能</h2>
+
+<!-- 月移動リンク -->
+<div>
+  <a href="?year={{ prev_month.year }}&month={{ prev_month.month }}">◀ 前月</a>
+  <strong>{{ year }}年{{ month }}月</strong>
+  <a href="?year={{ next_month.year }}&month={{ next_month.month }}">翌月 ▶</a>
+</div>
+
+<!-- カレンダー表 -->
+<table border="1" style="width: 100%; text-align: center;">
+  <tr>
+    {% for day in days %}
+      {% if forloop.counter0|divisibleby:7 %}
+        </tr><tr>
+      {% endif %}
+
+      <td class="calendar-cell">
+        <a href="{% url 'app_calendar:edit_day' year=day.year month=day.month day=day.day %}">
+          <div>{{ day.day }}</div>
+        </a>
+
+        {% if day in record_map %}
+          {% with records=record_map|dictkey:day %}
+            {% for rec in records %}
+              <div class="hover-wrapper">
+                😊<br>{{ rec.weight_record }}kg
+
+                <div class="popup workout-table">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Training No.</th>
+                        <th>部位</th>
+                        <th>トレーニング種別</th>
+                        <th>時間</th>
+                        <th>宅トレ★動画</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for menu in rec.workoutmenu_set.all %}
+                        <tr>
+                          <td>{{ forloop.counter }}</td>
+                          <td>{{ menu.video.get_body_part_labels.0 }}</td>
+                          <td>{{ menu.video.get_type_labels.0 }}</td>
+                          <td>{{ menu.video.duration_time }}</td>
+                          <td>
+                            <iframe width="120" height="70" src="{{ menu.video.get_embed_url }}" frameborder="0" allowfullscreen></iframe>
+                          </td>
+                        </tr>
+                      {% empty %}
+                        <tr><td colspan="5">運動メニューがありません</td></tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            {% endfor %}
+          {% endwith %}
+        {% endif %}
+      </td>
+    {% endfor %}
+  </tr>
+</table>
 {% endblock %}

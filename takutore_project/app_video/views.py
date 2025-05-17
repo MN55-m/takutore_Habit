@@ -46,8 +46,8 @@ def video_register(request):
 
 # 動画一覧画面を表示するビュー
 def video_list(request):
-   # 全ての動画データを取得
-    videos = Video.objects.all()
+   # 自分の動画 or デフォルト動画だけを表示
+    videos = Video.objects.filter(Q(user=request.user) | Q(is_template=True))
 
    # GETパラメータを取得
     time_categories = request.GET.getlist('time_category')

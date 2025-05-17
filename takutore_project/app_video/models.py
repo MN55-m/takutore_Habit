@@ -26,17 +26,19 @@ class Video(models.Model):
         "6": "顔",
     }
 
+    is_template = models.BooleanField(default=False)  # デフォルト動画フラグ
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # ユーザーと関連付け
     time_category = models.CharField(max_length=100, blank=True, null=True)  # 時間帯
     type_category = models.CharField(max_length=100, blank=True, null=True)  # 種別
     body_part_category = models.CharField(max_length=100, blank=True, null=True)  # 部位
     duration_time = models.CharField(max_length=5, blank=False)       # MM:SS 形式
-    duration_seconds = models.IntegerField(default=0)             # 秒数
+    duration_seconds = models.IntegerField(default=0, blank=True, null=True)             # 秒数
     youtuber_name = models.CharField(max_length=255)
     url = models.URLField()
     memo = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)  # 登録日時
     updated_at = models.DateTimeField(auto_now=True)  # 最終更新日時
+    
 
     class Meta:
       db_table = 'videos'  # ここでテーブル名を指定

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}  <!-- base.htmlを継承 -->
 
 {% block title %}宅トレ★登録動画一覧{% endblock %}  <!-- ページタイトルを設定 -->
 
 {% block extra_css %}
   {% load static %}
-  <link rel="stylesheet" href="{% static 'app_video/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'app_video/styles_video.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -70,7 +69,7 @@
                     <th>部位</th>
                     <th>動画時間</th>
                     <th>YouTuber名</th>
-                    <th>動画メモ</th>
+                    <th>メモ</th>
                     <th>宅トレ★動画</th>
                     <th></th>
                 </tr>
@@ -97,7 +96,7 @@
                       <div class="button-wrapper">
                         <!-- 編集ボタン -->
                         <form method="get" action="{% url 'app_video:video_edit' video.id %}" style="margin: 0;">
-                          <button type="submit">編集</button>
+                          <button class="edit-btn" type="submit">編集</button>
                         </form>
                         <!-- 削除ボタン（JavaScriptで処理する） -->
                         <button class="delete-btn" data-id="{{ video.id }}">削除</button>

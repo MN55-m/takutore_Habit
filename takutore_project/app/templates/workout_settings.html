@@ -1,9 +1,96 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}  <!-- base.htmlを継承 -->
 
 {% block title %}HOME{% endblock %}  <!-- ページタイトルを設定 -->
 
 {% block content %}
-<h1>宅トレ★WORK OUT設定</h1>
-<p>ここはHOMEページです。</p>
+<div class="container mt-5 mb-5 p-4 shadow rounded bg-white" style="max-width: 600px;">
+<!-- Select2 CSS & JS 読み込み -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <!-- 🌟 スタイルをここに直書き -->
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+    }
+
+    /* Select2の見た目に合わせて余白なども統一 */
+    input, select, .select2-container--default .select2-selection--multiple {
+         width: 100% !important;
+         border: 1px solid #ccc;
+         border-radius: 4px;
+         box-sizing: border-box;
+         min-height: 50px;
+
+    }
+
+    .button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .button {
+        padding: 12px 24px;
+        background-color: rgba(52, 78, 171, 0.59);
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .button:hover {
+        background-color: rgba(1, 8, 14, 0.4);
+    }
+
+    .form-group {
+        margin-bottom: 35px;  /* ← これで間隔が広がります！ */
+    }
+
+  </style>
+
+  <h2 class="title">【WORK OUT設定★条件選択】</h2>
+  <h3 class="timing">===== {{ timing_display }} =====</h3>
+
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="{{ form.duration.id_for_label }}" class="form-label">{{ form.duration.label }}</label>
+      {{ form.duration }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.parts.id_for_label }}" class="form-label">{{ form.parts.label }}</label>
+      {{ form.parts }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.types.id_for_label }}" class="form-label">{{ form.types.label }}</label>
+      {{ form.types }}
+    </div>
+    <div class="button-container">
+      <button type="submit" class="button">運動メニュー作成</button>
+    </div>
+  </form>
+</div>
+
+<!-- Select2 初期化 -->
+<script>
+  $(document).ready(function() {
+    $('#id_parts').select2({placeholder: "部位を選択してください"});
+    $('#id_types').select2({placeholder: "種別を選択してください"});
+  });
+</script>
 {% endblock %}

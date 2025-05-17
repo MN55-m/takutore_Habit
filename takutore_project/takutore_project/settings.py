@@ -127,6 +127,7 @@ USE_TZ = True
 # staticファイルの出力先
 # 開発用: staticファイルを読み込む場所（アプリ内 static フォルダ）
 STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'app_calendar', 'static'),
     os.path.join(BASE_DIR, 'app_video', 'static'),
 ]
 
