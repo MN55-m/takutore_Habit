@@ -102,3 +102,30 @@
 .hover-wrapper:hover .popup.workout-table {
   display: block;
 }
+
+/* 他の月の日付を薄く */
+.other-month .day-number,
+.other-month.saturday .day-number,
+.other-month.sunday .day-number {
+  color: #ccc;
+}
+
+/* 曜日色 */
+.sunday .day-number {
+  color: red;
+}
+.saturday .day-number {
+  color: blue;
+}
+
+/* テーブルヘッダーにも色をつける場合 */
+th.sunday {
+  color: red;
+}
+th.saturday {
+  color: blue;
+}
+
+th.saturday {
+  color: blue;
+}

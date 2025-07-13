@@ -1,9 +1,9 @@
 {% extends 'base.html' %}  <!-- base.htmlを継承 -->
+{% load static %}
 
 {% block title %}宅トレ★登録動画一覧{% endblock %}  <!-- ページタイトルを設定 -->
 
 {% block extra_css %}
-  {% load static %}
   <link rel="stylesheet" href="{% static 'app_video/styles_video.css' %}">
 {% endblock %}
 
@@ -13,52 +13,52 @@
     <div class="search-container">
       <div class="search-title">検索条件</div>
       <!-- 検索フォーム（絞り込み検索ができる） -->
-        <form method="get">
-           <div class="search-item">
+      <form method="get">
+          <div class="search-item">
           <!-- 時間帯の選択 -->
-             <label for="id_time_category">時間帯</label>
-             <select name="time_category" multiple id="id_time_category">
+            <label for="id_time_category">時間帯</label>
+            <select name="time_category" multiple id="id_time_category">
+              <option value="99">すべて</option>
+              <option value="0">朝トレ</option>
+              <option value="1">夜トレ</option>
+            </select>
+          </div>
+             <!-- トレーニング種別の選択 -->
+          <div class="search-item">
+            <label for="id_type_category">トレーニング種別</label>
+            <select name="type_category" multiple id="id_type_category">
+              <option value="99">すべて</option>
+              <option value="0">ストレッチ</option>
+              <option value="1">筋トレ</option>
+              <option value="2">フォームローラ</option>
+              <option value="3">マッサージ</option>
+            </select>
+           </div>
+            <!-- 部位の選択 -->
+           <div class="search-item">
+             <label for="id_body_part_category">部位</label>
+             <select name="body_part_category" multiple id="id_body_part_category">
                <option value="99">すべて</option>
-               <option value="0">朝トレ</option>
-               <option value="1">夜トレ</option>
+               <option value="0">姿勢</option>
+               <option value="1">全身</option>
+               <option value="2">脚</option>
+               <option value="3">お腹</option>
+               <option value="4">上半身</option>
+               <option value="5">骨盤矯正</option>
+               <option value="6">顔</option>
              </select>
            </div>
-             <!-- トレーニング種別の選択 -->
+           <!-- キーワード入力（自由検索） -->
            <div class="search-item">
-             <label for="id_type_category">トレーニング種別</label>
-             <select name="type_category" multiple id="id_type_category">
-               <option value="99">すべて</option>
-               <option value="0">ストレッチ</option>
-               <option value="1">筋トレ</option>
-               <option value="2">フォームローラ</option>
-               <option value="3">マッサージ</option>
-             </select>
-            </div>
-              <!-- 部位の選択 -->
-            <div class="search-item">
-              <label for="id_body_part_category">部位</label>
-              <select name="body_part_category" multiple id="id_body_part_category">
-                <option value="99">すべて</option>
-                <option value="0">姿勢</option>
-                <option value="1">全身</option>
-                <option value="2">脚</option>
-                <option value="3">お腹</option>
-                <option value="4">上半身</option>
-                <option value="5">骨盤矯正</option>
-                <option value="6">顔</option>
-              </select>
-            </div>
-              <!-- キーワード入力（自由検索） -->
-            <div class="search-item">
-              <label for="id_body_part_category">キーワード</label>
-              <input type="text" name="keyword" id="keyword" placeholder="キーワードを入力">
-            </div>
-              <!-- 検索ボタン -->
-            <div class="search-item" style="vertical-align: bottom;">
-                <label>&nbsp;</label> <!-- ラベル無しでスペース -->
-                <button type="submit">検索</button>
-            </div>
-        </form>
+             <label for="id_body_part_category">キーワード</label>
+             <input type="text" name="keyword" id="keyword" placeholder="キーワードを入力">
+           </div>
+           <!-- 検索ボタン -->
+           <div class="search-item" style="vertical-align: bottom;">
+               <label>&nbsp;</label> <!-- ラベル無しでスペース -->
+               <button type="submit">検索</button>
+           </div>
+      </form>
     </div> 
         <!-- 動画一覧テーブル -->
           <table border="1">

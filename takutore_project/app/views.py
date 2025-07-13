@@ -9,6 +9,9 @@ from django.shortcuts import redirect
 from app.forms import SignupForm, LoginForm, MypageForm, PasswordChangeForm  # 作成したフォームをインポート
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
+from django.views import View
+from app_workout.models import WorkoutRecord
+from django.utils.timezone import localtime
 
 User = get_user_model()  # カスタムユーザーモデルを取得
 
@@ -55,9 +58,47 @@ class LoginView(View):
 # トップページビュー（ログインが必要）
 class HomeView(LoginRequiredMixin, View):
     login_url = "login"  # ログインしていない場合、ログインページにリダイレクト
-    def get(self, request):
-        return render(request, "home.html")
 
+    def get(self, request):
+        user = request.user
+        today = localtime().date()
+
+        # 本日までの体重記録のうち、最新の1件（created_atの降順）
+        latest_record = (
+            WorkoutRecord.objects
+            .filter(user=user, created_at__date__lte=today)
+            .exclude(weight_record__isnull=True)
+            .order_by('-created_at')
+            .first()
+        )
+
+        # レコードがあればその体重、なければ初期体重
+        current_weight = latest_record.weight_record if latest_record else user.weight
+
+        # 身長から適正体重・美容体重を計算
+        height = user.height
+        height_m = height / 100
+        appropriate_weight = round(22 * height_m * height_m, 1)
+        beauty_weight = round(20 * height_m * height_m, 1)
+
+        appropriate_diff = round(current_weight - appropriate_weight, 1) if current_weight else None
+        beauty_diff = round(current_weight - beauty_weight, 1) if current_weight else None
+
+        # 曜日も渡したいなら以下を追加
+        weekday_japanese = ["月", "火", "水", "木", "金", "土", "日"]
+        weekday = weekday_japanese[today.weekday()]
+
+        context = {
+            'today': today,
+            'weekday': weekday,
+            'current_weight': current_weight,
+            'ideal_weight': appropriate_weight,  # ← テンプレートに合わせて修正
+            'beauty_weight': beauty_weight,
+            'ideal_diff': abs(appropriate_diff) if appropriate_diff and appropriate_diff > 0 else 0,
+            'beauty_diff': abs(beauty_diff) if beauty_diff and beauty_diff > 0 else 0,
+        }
+
+        return render(request, "home.html", context)
 
 
 # マイページビュー（ログインが必要）

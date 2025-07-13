@@ -1,64 +1,64 @@
 {% extends 'base.html' %}
-
 {% load custom_filters %}
+{% load static %}
 
-{% block title %}カレンダー編集{% endblock %}
-
+{% block title %}{{ date|date:"Y年n月j日" }} の編集{% endblock %}
 {% block extra_css %}
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'app_calendar/styles_calendar.css' %}">
+  <link rel="stylesheet" href="{% static 'app_calendar/styles_calendar_edit.css' %}">
 {% endblock %}
 
 {% block content %}
 <h2>{{ date|date:"Y年n月j日" }} の編集</h2>
 
-<form method="post">
-  {% csrf_token %}
+<div class="edit-container">
+  <form method="post">
+    {% csrf_token %}
+    
+    <div class="form-group">
+      <label for="weight_record">体重：</label>
+      <input type="text" id="weight_record" name="weight_record" value="{{ records.0.weight_record|default:'' }}"> kg
+    </div>
 
-  <p>
-    <label>体重：</label>
-    <input type="number" step="0.1" name="weight_record" value="{{ records.0.weight_record }}"> kg
-  </p>
+    {% if records %}
+      <div class="workout-section">
+        <h3>運動リスト：</h3>
+        <table class="video-table">
+          <thead>
+            <tr>
+              <th>Training No.</th>
+              <th>部位</th>
+              <th>トレーニング種別</th>
+              <th>時間</th>
+              <th>宅トレ★動画</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for menu in records.first.workoutmenu_set.all %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ menu.video.get_body_part_labels.0 }}</td>
+                <td>{{ menu.video.get_type_labels.0 }}</td>
+                <td>{{ menu.video.duration_time }}</td>
+                <td>
+                  <iframe width="200" height="110" src="{{ menu.video.get_embed_url }}" frameborder="0" allowfullscreen></iframe>
+                  <br>
+                  <a href="{{ video.url }}" target="_blank">YouTubeで見る</a>
+                </td>
+              </tr>
+            {% empty %}
+              <tr><td colspan="5">登録された運動メニューはありません</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
 
-  <p>
-    <label>運動リスト：</label>
-  </p>
+    <div class="form-group">
+      <br><label for="memo">メモ：</label><br>
+      <textarea id="memo" name="memo" rows="4" cols="50">{{ records.first.memo|default:'' }}</textarea>
+    </div>
 
-  <table border="1" style="width: 100%; text-align: center;">
-    <thead>
-      <tr>
-        <th>Training No.</th>
-        <th>部位</th>
-        <th>トレーニング種別</th>
-        <th>時間</th>
-        <th>宅トレ★動画</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for record in records %}
-        {% for wm in record.workoutmenu_set.all|dictsort:"sequence" %}
-        <tr>
-          <td>{{ wm.sequence }}</td>
-          <td>{{ wm.video.get_body_part_labels.0 }}</td>
-          <td>{{ wm.video.get_type_labels.0 }}</td>
-          <td>{{ wm.video.duration_time }}</td>
-          <td>
-            <iframe width="120" height="70" src="{{ wm.video.get_embed_url }}" frameborder="0" allowfullscreen></iframe>
-          </td>
-        </tr>
-        {% endfor %}
-      {% endfor %}
-    </tbody>
-  </table>
-
-  <br>
-
-  <p>
-    <label>メモ：</label><br>
-    <textarea name="memo" rows="4" cols="60">{{ records.0.memo }}</textarea>
-  </p>
-
-  <br>
-  <button type="submit">保存</button>
-</form>
+    <button type="submit">保存</button>
+  </form>
+</div>
 {% endblock %}

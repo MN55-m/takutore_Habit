@@ -1,99 +1,116 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宅トレ★Habit</title>
-<!-- CSSスタイル定義 -->
-    <style>
-      /* ページ全体のフォントとテキスト配置 */
-      body {
-          font-family: Arial, sans-serif; /* フォントを指定 */
-          text-align: center; /* コンテンツを中央揃えに */
-      }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宅トレ★Habit - 新規登録</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
 
-      /* ページタイトルのスタイリング */
-      h1 {
-          font-size: 24px; /* タイトルのフォントサイズ */
-      }
+    h1 {
+      font-size: 24px;
+    }
 
-      /* サブタイトルのスタイリング */
-      h2 {
-          font-size: 16px; /* サブタイトルのフォントサイズ */
-          margin-bottom: 20px; /* 下に余白を追加 */
-      }
+    .form-container {
+      width: 400px;
+      margin: 0 auto;
+      text-align: left;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
 
-    /* フォーム全体を中央配置 */
-      .form-container {
-          width: 300px; /* フォームの幅を指定 */
-          margin: 0 auto; /* 中央に配置 */
-          text-align: left; /* フォーム内のテキストを左寄せ */
-          padding: 20px;
-          border: 1px solid #ccc; /* 枠線をつける（不要なら削除） */
-          border-radius: 5px;
-          background-color: #f9f9f9; /* 背景色をつける（不要なら削除） */
-      }
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
 
-     /* 入力フィールドのスタイル */
-      .form-group {
-          margin-bottom: 15px;
-      }
+    .form-group label {
+      width: 120px;
+      font-weight: bold;
+    }
 
-      .form-group label {
-          display: block; /* ラベルをブロック要素に */
-          margin-bottom: 5px; /* ラベルと入力欄の間のスペース */
-      }
+    .form-group input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
 
-      .form-group input {
-          width: 250px; /* 入力欄の幅 */
-          padding: 8px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-      }
+    .form-group span {
+      margin-left: 5px;
+    }
 
-    /* ボタンをまとめるコンテナのスタイリング */
-      .button-container {
-          display: flex;
-          justify-content: center; /* コンテナ内の要素を中央揃え */
-          gap: 20px; /* ボタン同士の間隔を20pxに設定 */
-          margin-top: 20px; /* 上に余白を追加 */
-      }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 20px;
+    }
 
-    /* ボタンのデザイン */
-      button {
-          padding: 10px 20px; /* ボタンの内側の余白 */
-          font-size: 16px; /* ボタン内のテキストサイズ */
-          cursor: pointer; /* マウスポインタを「クリックできる状態」に変更 */
-          border: none;
-          background-color: #007BFF;
-          color: white;
-          border-radius: 5px;
-      }
+    button {
+      padding: 10px 30px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #aaa;
+      background-color: #eee;
+      border-radius: 5px;
+    }
 
-      button:hover {
-          background-color: #0056b3;
-      }
-    </style>
+    button:hover {
+      background-color: #ddd;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #666;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-    <h1>新規登録画面</h1>
+  <h1>新規登録</h1>
+  <div class="form-container">
     <form method="post">
-        {% csrf_token %}
-        <div class="form-group"><label for="username">ユーザー名</label><input type="text" name="username"></div>
-        <div class="form-group"><label for="email">mail</label><input type="email" name="email"></div>
-        <div class="form-group"><label for="password">password</label><input type="password" name="password1"></div>
-        <div class="form-group"><label for="password">password(確認)</label><input type="password" name="password2"></div>
-        <div class="form-group"><label for="height">身長</label><input type="float" name="height"></div>
-        <div class="form-group"><label for="weight">体重</label><input type="float" name="weight"></div>
-        <button type="submit">登録</button>
-    </form>
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="username">ユーザー名</label>
+        <input type="text" name="username">
+      </div>
+      <div class="form-group">
+        <label for="email">mail</label>
+        <input type="email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="password1">password</label>
+        <input type="password" name="password1">
+      </div>
+      <div class="form-group">
+        <label for="password2">password(確認)</label>
+        <input type="password" name="password2">
+      </div>
+      <div class="form-group">
+        <label for="height">身長</label>
+        <input type="number" name="height" step="0.1"><span>cm</span>
+      </div>
+      <div class="form-group">
+        <label for="weight">体重</label>
+        <input type="number" name="weight" step="0.1"><span>kg</span>
+      </div>
 
-    {{ form.errors }}
-    <div class="button-container"> <!-- ボタン配置 -->
-        <!-- ログイン画面へ戻るボタン -->
+      <div class="button-container">
         <a href="{% url 'login' %}">
-            <button type="submit">ログイン画面へ戻る</button>
+          <button type="button">ログイン画面へ戻る</button>
         </a>
-      </div>  
+        <button type="submit">登録</button>
+      </div>
+    </form>
+    {{ form.errors }}
+  </div>
 </body>
 </html>

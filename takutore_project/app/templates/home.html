@@ -1,8 +1,62 @@
-{% extends 'base.html' %}  <!-- base.htmlを継承 -->
+{% extends 'base.html' %}
+{% load static %}
 
-{% block title %}HOME{% endblock %}  <!-- ページタイトルを設定 -->
+{% block title %}HOME{% endblock %}
+{% block extra_class %}centered{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'app/home.css' %}">
+{% endblock %}
 
 {% block content %}
-<h1>HOMEページ</h1>
-<p>ここはHOMEページです。</p>
+<div class="home-container">
+
+  <!--  メインタイトル -->
+  <h1>Home</h1>
+
+  <!--  情報ボックス：日付と体重 -->
+  <div class="info-box today-info">
+    <p class="date">{{ today }}（{{ weekday }}）</p>
+    <p class="weight">体重：<strong>{{ current_weight }}kg</strong></p>
+
+    <!--  適正体重＆美容体重の比較エリア -->
+    <div class="weight-comparison">
+
+      <!--  適正体重カード -->
+      <div class="weight-card" style="border: 2px solid #88c; background-color: {% if current_weight <= ideal_weight %}#d8edff{% else %}#ffffff{% endif %};">
+        <p>適正体重：<strong>{{ ideal_weight }}kg</strong></p>
+        {% if current_weight > ideal_weight %}
+          <p class="remaining">あと <strong>{{ ideal_diff }}kg</strong>！</p>
+        {% else %}
+          <p class="goal">GOAL！</p>
+        {% endif %}
+      </div>
+
+      <!--  美容体重カード -->
+      <div class="weight-card" style="border: 2px solid #c88; background-color: {% if current_weight <= beauty_weight %}#d0f0ff{% else %}#fff{% endif %};">
+        <p>美容体重：<strong>{{ beauty_weight }}kg</strong></p>
+        {% if current_weight > beauty_weight %}
+          <p class="remaining">あと <strong>{{ beauty_diff }}kg</strong>！</p>
+        {% else %}
+          <p class="goal">GOAL！</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!--  カレンダーリンク -->
+    <div class="calendar-link-area">
+      <a href="{% url 'app_calendar:calendar' %}" class="calendar-link">カレンダー</a>
+    </div>
+  </div>
+
+  <!--  宅トレメニュー -->
+  <div class="info-box">
+    <h2 class="workout-title">宅トレ</h2>
+    <div class="workout-buttons">
+      <a href="{% url 'app_video:video_register' %}">動画の登録</a>
+      <a href="{% url 'app_workout:workout_settings' %}">WORKOUT設定</a>
+    </div>
+  </div>
+
+</div>
 {% endblock %}

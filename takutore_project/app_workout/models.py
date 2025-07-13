@@ -18,7 +18,7 @@ class WorkoutRecord(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # 誰の記録か
     weight_record = models.FloatField(blank=True, null=True)  # 体重（任意）
     memo = models.TextField(blank=True, null=True)            # メモ（任意）
-    created_at = models.DateTimeField(auto_now_add=True)      # 登録日時
+    created_at = models.DateTimeField()                       # 登録日時
     updated_at = models.DateTimeField(auto_now=True)          # 更新日時
 
     class Meta:

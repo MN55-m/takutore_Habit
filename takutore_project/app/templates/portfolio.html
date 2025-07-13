@@ -1,12 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>宅トレ★Habit</title>
+  <meta charset="UTF-8">
+  <title>ポートフォリオ</title>
+  <link rel="stylesheet" href="{% static 'app/styles_portfolio.css' %}">
 </head>
 <body>
-    <h1>ポートフォリオページ</h1>
-    <a href="{% url 'login' %}">アプリへ</a>
+  <div class="container">
+
+    <h1>作品No.1：宅トレ★Habit</h1>
+
+    <p>
+      宅トレ★Habitは、自分のお気に入りの運動動画を登録・管理し、<br>
+      効率的に運動習慣かつモチベーション維持をサポートするアプリです。<br>
+      このアプリはこのアプリでは、運動動画をカテゴリ別に整理でき、条件入力だけで運動メニューを自動生成できます。<br>
+      さらに、体重や運動記録がカレンダーで可視化され、継続のモチベーションを高めます。
+    </p>
+
+    <div class="image-row">
+      <img src="{% static 'images/video_list_img.png' %}" alt="宅トレ★動画一覧">
+      <img src="{% static 'images/workout_menu_img.png' %}" alt="宅トレ★運動メニュー">
+      <img src="{% static 'images/calendar_img.png' %}" alt="カレンダー">
+    </div>
+
+    <h2>資料リンク</h2>
+    <p>
+      <a href="{% static 'pdf/plan.pdf' %}" target="_blank">企画書・画面設計図</a> |
+      <a href="{% static 'pdf/UI_flow.pdf' %}" target="_blank">画面遷移図</a> |
+      <a href="{% static 'pdf/ER.pdf' %}" target="_blank">ER図</a>
+    </p>
+
+    <a class="access-button" href="{% url 'login'%}" target="_blank">アプリにアクセス</a>
+
+  </div>
 </body>
 </html>

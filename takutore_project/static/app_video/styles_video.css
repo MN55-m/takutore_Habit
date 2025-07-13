@@ -1,7 +1,9 @@
 /* ===== 検索フォームエリア ===== */
 .search-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;   /* 中央寄せ */
+  align-items: center;
   margin-bottom: 50px;       /* 一覧表との間に余白 */
   border: 1px solid #ccc;  /* ← 枠線を追加 */
   padding: 20px;           /* ← 内側の余白を追加 */
@@ -14,16 +16,17 @@
 
 .search-container form {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 20px;
   align-items: flex-end;
-  width: 90%;
+  width: 100%;
   max-width: 1000px;
 }
 
 .search-item {
   display: flex;
   flex-direction: column;
+  flex: 1 1 200px;
 }
 
 .search-item label {
@@ -36,7 +39,7 @@
 }
 
 .search-item select {
-  min-width: 180px; 
+  min-width: 150px; 
   width: 100%;
   padding: 4px;
   box-sizing: border-box; /* padding含めた幅調整 */
@@ -63,9 +66,11 @@
 .search-title {
   font-weight: bold;
   font-size: 1.2em;   /* 好きなサイズに */
-  margin-bottom: 70px;
+  margin-bottom: 20px;
+   /* 横書きの強制 */
+  writing-mode: horizontal-tb;
+  display: block;
 }
-
 
 /* ===== 一覧表エリア ===== */
 table {

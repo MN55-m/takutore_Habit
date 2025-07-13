@@ -1,0 +1,74 @@
+/* ==========================
+   ナビゲーションバー共通スタイル
+   ========================== */
+
+/* ナビゲーションバー全体のレイアウトとスタイル */
+.navbar {
+    display: flex;                     /* 子要素（左右）を横並びにする */
+    justify-content: space-between;   /* 左右にグループを分けて配置する */
+    align-items: center;              /* 縦方向中央揃え */
+    background-color: #87CEEB;        /* ナビゲーションバーの背景色（水色） */
+    padding: 10px 20px;               /* 上下10px、左右20pxの余白 */
+    border-radius: 10px 10px 0 0;     /* 上の角だけ丸くする */
+    flex-wrap: wrap;                  /* 狭い画面では折り返せるようにする */
+    font-size: 25px;
+}
+
+/* 左側（HOMEリンク）用コンテナ */
+.navbar-left a {
+    margin-left: 10px;                /* 左に少し余白 */
+    font-weight: bold;                /* 太字 */
+    color: black;                     /* 文字色を黒に */
+    text-decoration: none;            /* リンクの下線を消す */
+    padding: 8px 16px;                /* 内側に余白（クリックしやすく） */
+}
+
+/* 右側（カレンダー〜ログアウト）用の全体コンテナ */
+.navbar-right {
+    display: flex;                    /* 子要素を横並びにする */
+    align-items: center;              /* 縦方向中央揃え */
+    gap: 15px;                        /* 各リンクの間にスペースを空ける */
+    flex-wrap: wrap;                  /* 折り返しを許可してスマホ対応 */
+    margin-top: 10px;                 /* スマホ時に下に表示されたときの余白 */
+}
+
+/* 右側の各リンクの共通スタイル */
+.navbar-right a {
+    font-weight: bold;                /* 太字にする */
+    color: black;                     /* 黒い文字 */
+    text-decoration: none;            /* 下線なし */
+    padding: 8px 12px;                /* クリックしやすいよう余白追加 */
+}
+
+/* ログアウトリンクだけ、ボタンっぽく見せる */
+.navbar-right .logout {
+    border: 1px solid black;          /* 枠線 */
+    border-radius: 5px;               /* 角丸 */
+    background-color: white;          /* 背景色は白 */
+}
+
+/* ホバー時（マウスを載せた時）に背景色を変える */
+.navbar-left a:hover,
+.navbar-right a:hover {
+    background-color: #add8e6;        /* 明るい水色に変化させる */
+}
+
+/* ==========================
+   スマホ対応（レスポンシブ対応）
+   ========================== */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;       /* 縦並びに変更 */
+        align-items: flex-start;      /* 左寄せにする */
+    }
+
+    .navbar-right {
+        justify-content: flex-start;  /* 右側リンクも左寄せにする */
+        margin-top: 10px;             /* HOMEと間隔を空ける */
+    }
+
+    .navbar a {
+        width: 100%;                  /* 幅いっぱいにしてスマホでも押しやすく */
+        padding: 10px;                /* 余白を調整 */
+    }
+}

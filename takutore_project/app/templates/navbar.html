@@ -1,15 +1,19 @@
-<!DOCTYPE html>
-<!-- ナビゲーションバー -->
+<!-- ナビゲーションバー全体のdiv（左右に分けるため） -->
 <div class="navbar">
+
+  <!-- 左側のメニュー（HOME） -->
+  <div class="navbar-left">
     <a href="{% url 'home' %}">HOME</a>
-    <a></a>
-    <a></a>
-    <a></a>
-    <a></a>
+  </div>
+
+  <!-- 右側のメニュー（カレンダー〜マイページ、ログアウト） -->
+  <div class="navbar-right">
     <a href="{% url 'app_calendar:calendar' %}">カレンダー</a>
     <a href="{% url 'app_video:video_register' %}">宅トレ★動画登録</a>
     <a href="{% url 'app_video:video_list' %}">宅トレ★動画一覧</a>
     <a href="{% url 'app_workout:workout_settings' %}">宅トレ★WORK OUT設定</a>
     <a href="{% url 'mypage' %}">マイページ</a>
+    <!-- ログアウトは特別なスタイルを当てるため class="logout" を指定 -->
     <a href="{% url 'login' %}" class="logout">ログアウト</a>
+  </div>
 </div>

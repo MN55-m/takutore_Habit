@@ -125,15 +125,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 # staticファイルの出力先
-# 開発用: staticファイルを読み込む場所（アプリ内 static フォルダ）
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'app_calendar', 'static'),
-    os.path.join(BASE_DIR, 'app_video', 'static'),
-]
-
 # 本番用: collectstatic でコピー先のパス
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
+
+# 開発用: staticファイルを読み込む場所（アプリ内 static フォルダ）
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

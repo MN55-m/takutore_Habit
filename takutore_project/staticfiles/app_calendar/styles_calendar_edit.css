@@ -1,0 +1,102 @@
+/* ----------------------------
+   編集画面全体の外枠スタイル
+---------------------------- */
+.edit-container {
+  background-color: #f9f9f9;        /* 全体の背景色（薄いグレー） */
+  padding: 30px;                    /* 内側の余白 */
+  margin: 20px auto;                /* 上下に余白、左右は中央寄せ */
+  width: 90%;                       /* 画面幅の90% */
+  max-width: 1000px;                /* 最大幅は1000pxに制限 */
+  border: 1px solid #ccc;           /* 薄いグレーの枠線 */
+  border-radius: 8px;               /* 角を丸める */
+  box-sizing: border-box;           /* padding・borderを含めてサイズ計算 */
+}
+
+/* ----------------------------
+   フォームの各項目（体重・メモなど）
+---------------------------- */
+.form-group {
+  margin-bottom: 20px;              /* 各項目の下に余白を作る */
+  font-size: 16px;                  /* フォントサイズ */
+}
+
+/* ----------------------------
+   ラベル（体重やメモなどの見出し）
+---------------------------- */
+label {
+  font-weight: bold;               /* 太字にする */
+  margin-right: 10px;              /* 右に少し余白 */
+  display: inline-block;           /* 幅を調整可能にする */
+  margin-bottom: 5px;              /* 下に余白 */
+}
+
+/* ----------------------------
+   テキスト入力欄（体重など）
+---------------------------- */
+input[type="text"] {
+  padding: 6px;                    /* 内側の余白 */
+  width: 100px;                    /* 入力欄の幅 */
+  font-size: 14px;                 /* 文字サイズ */
+  box-sizing: border-box;         /* padding含めた幅調整 */
+}
+
+/* ----------------------------
+   メモ欄（textarea）
+---------------------------- */
+textarea {
+  padding: 8px;                    /* 内側の余白 */
+  width: 100%;                     /* 幅いっぱいに広げる */
+  height: 100px;                   /* 高さ */
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+/* ----------------------------
+   運動リストのテーブル全体
+---------------------------- */
+.video-table {
+  width: 100%;                     /* 横幅いっぱい */
+  border-collapse: collapse;       /* 罫線の二重線を1本に */
+  margin-top: 10px;                /* 上に少し余白 */
+  font-size: 14px;                 /* 文字サイズ */
+  background-color: #e0e0e0; /* ← お好きな色に変更 */
+  font-weight: bold;
+}
+
+/* ----------------------------
+   テーブル内のセル（共通）
+---------------------------- */
+.video-table th,
+.video-table td {
+  border: 1px solid #aaa;          /* セルの枠線 */
+  padding: 10px;                   /* セル内の余白 */
+  text-align: center;              /* 中央寄せ */
+  background-color: white;  /* ★ セルも白背景に */
+}
+
+/* ----------------------------
+   iframe内の動画サイズ
+---------------------------- */
+.video-table iframe {
+  width: 200px;
+  height: 110px;
+}
+
+/* ----------------------------
+   保存ボタン
+---------------------------- */
+button[type="submit"] {
+  background-color: #4682B4;       /* 青色の背景（スチールブルー） */
+  color: white;                    /* 文字は白 */
+  border: none;                    /* 枠線なし */
+  padding: 10px 20px;              /* 内側余白 */
+  font-size: 15px;
+  border-radius: 5px;              /* 角を丸める */
+  cursor: pointer;                 /* ホバー時にポインタ */
+  margin-top: 10px;                /* 上の余白 */
+}
+
+/* ボタンのホバー時 */
+button[type="submit"]:hover {
+  background-color: #316f9e;       /* 少し濃い青に変化 */
+}

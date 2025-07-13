@@ -1,0 +1,69 @@
+/* ================================
+   base.css - サイト全体の共通スタイル
+   ================================ */
+
+/*  全体のフォントとリセット */
+body {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5; /* 背景を薄グレーにして柔らかい印象に */
+  color: #333; /* 文字色は濃いグレーで読みやすく */
+}
+
+/* ================================
+   コンテンツエリアの共通スタイル
+   ================================ */
+.content {
+  width: 100%;                /* 幅100%で伸縮可能 */
+  max-width: 1100px;          /* 最大幅は1100px */
+  margin: 0 auto;             /* 中央に配置 */
+  padding: 30px 20px;         /* 上下左右に余白を設ける */
+  box-sizing: border-box;     /* padding を幅に含める（はみ出し防止） */
+}
+
+/* ================================
+   縦横中央揃え用レイアウト
+   ================================ */
+.centered-page {
+  display: flex;              /* フレックスボックスで */
+  flex-direction: column;     /* 縦方向に配置 */
+  justify-content: center;    /* 垂直方向に中央寄せ */
+  align-items: center;        /* 水平方向に中央寄せ */
+  min-height: 80vh;           /* 高さを画面の8割にして中央寄せを実現 */
+}
+
+/* ================================
+   ナビゲーションバーのベース調整（補足的）
+   ================================ */
+.navbar {
+  padding: 10px 20px;
+  background-color: #87CEEB;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* スマホ時に折り返す */
+}
+
+/* ================================
+   レスポンシブ対応（スマホ・タブレット）
+   ================================ */
+@media (max-width: 768px) {
+  .content {
+    padding: 20px 10px; /* 余白を少し減らしてスマホに対応 */
+  }
+
+  .navbar {
+    flex-direction: column;        /* 縦並びに変更 */
+    align-items: flex-start;       /* 左寄せに */
+  }
+
+  .navbar a {
+    margin-bottom: 8px;            /* リンク同士の間隔を広げる */
+  }
+
+  .centered-page {
+    padding: 20px;
+    min-height: auto;              /* 画面サイズが狭いときは高さ制限なし */
+  }
+}

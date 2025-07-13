@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from app.views import PortfolioView, SignupView, LoginView, HomeView, MypageView, MyPageEditView, PasswordChangeView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,3 +17,5 @@ urlpatterns = [
     path('takutore_project/mypage/edit/', MyPageEditView.as_view(), name='mypage_edit'),
     path('takutore_project/mypage/password_change/', PasswordChangeView.as_view(), name='password_change'),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

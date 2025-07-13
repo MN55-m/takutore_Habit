@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+   background-color: #fff;
+}
+
+th {
+   background-color: #e0f7fa;  /* ← 好きな色に変更！ */
+   color: #333;
+   padding: 10px;
+   font-size: 14px;
+   border: 1px solid #ccc;
+}
+
+td {
+   border: 1px solid #ccc;
+   padding: 10px;
+   font-size: 13px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Select2の見た目に合わせて余白なども統一 */
+input, select, .select2-container--default .select2-selection--multiple {
+    width: 100% !important;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    min-height: 50px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button {
+    padding: 12px 24px;
+    background-color: rgba(52, 78, 171, 0.59);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: rgba(1, 8, 14, 0.4);
+}
+
+.form-group {
+    margin-bottom: 35px;  /* ← これで間隔が広がります！ */
+}
+
+    /* 中央で大きく黄色のボタン */
+.big-button {
+    background-color: #ffff66;  /* 薄い黄色 */
+    font-size: 24px;
+    padding: 20px 40px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;  /* 中央配置 & 余白 */
+}
+
+.big-button:hover {
+    background-color: #ffeb3b;
+}

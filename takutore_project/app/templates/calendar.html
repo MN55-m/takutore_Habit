@@ -1,77 +1,110 @@
 {% extends 'base.html' %}
-
 {% load custom_filters %}
+{% load static %}
 
 {% block title %}カレンダー{% endblock %}
 
 {% block extra_css %}
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'app_calendar/styles_calendar.css' %}">
+<link rel="stylesheet" href="{% static 'app_calendar/styles_calendar.css' %}">
 {% endblock %}
 
 {% block content %}
 <h2>カレンダー機能</h2>
 
-<!-- 月移動リンク -->
-<div>
-  <a href="?year={{ prev_month.year }}&month={{ prev_month.month }}">◀ 前月</a>
-  <strong>{{ year }}年{{ month }}月</strong>
-  <a href="?year={{ next_month.year }}&month={{ next_month.month }}">翌月 ▶</a>
+<div class="calendar-container">
+  <div class="calendar-nav">
+    <a href="?year={{ prev_month.year }}&month={{ prev_month.month }}">◀ 前月</a>
+    <strong>{{ year }}年{{ month }}月</strong>
+    <a href="?year={{ next_month.year }}&month={{ next_month.month }}">翌月 ▶</a>
+  </div>
+
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th class="sunday">日</th>
+        <th>月</th>
+        <th>火</th>
+        <th>水</th>
+        <th>木</th>
+        <th>金</th>
+        <th class="saturday">土</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for week in weeks %}
+        <tr>
+          {% for day in week %}
+            {% with day|date:"w" as weekday %}
+              <td class="calendar-cell
+                {% if day == today %} today{% endif %}
+                {% if day in record_map %} has-record{% endif %}
+                {% if day.month != month %} other-month{% endif %}
+                {% if weekday == '0' %} sunday{% elif weekday == '6' %} saturday{% endif %}
+              ">
+                {% if day in record_map %}
+                  <div class="day-number">{{ day.day }}</div>
+                  {% with records=record_map|dictkey:day %}
+                    {% for rec in records %}
+                      <div class="hover-wrapper">
+                        {% if rec.workoutmenu_set.all %}
+                          <!-- ✅ 運動メニューあり：スタンプクリック -->
+                          <a href="{% url 'app_calendar:edit_day' year=day.year month=day.month day=day.day record_id=rec.id %}">
+                            <span class="emoji">😊</span>
+                          </a><br>
+                        {% endif %}
+
+                        {% if rec.weight_record %}
+                          <!-- ✅ 体重クリックで編集 -->
+                          <a href="{% url 'app_calendar:edit_day' year=day.year month=day.month day=day.day record_id=rec.id %}" class="weight-link">
+                            {{ rec.weight_record }}kg
+                          </a>
+                        {% endif %}
+
+                        {% if rec.workoutmenu_set.all %}
+                          <div class="popup workout-table">
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>No.</th>
+                                  <th>部位</th>
+                                  <th>種別</th>
+                                  <th>時間</th>
+                                  <th>動画</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for menu in rec.workoutmenu_set.all %}
+                                  <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ menu.video.get_body_part_labels.0 }}</td>
+                                    <td>{{ menu.video.get_type_labels.0 }}</td>
+                                    <td>{{ menu.video.duration_time }}</td>
+                                    <td>
+                                      <iframe width="120" height="70" src="{{ menu.video.get_embed_url }}" frameborder="0" allowfullscreen></iframe>
+                                      <br>
+                                      <a href="{{ video.url }}" target="_blank">YouTubeで見る</a>
+                                    </td>
+                                  </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  {% endwith %}
+                {% else %}
+                  <!-- ✅ 記録なしなら日付クリック -->
+                  <a href="{% url 'app_calendar:edit_day' year=day.year month=day.month day=day.day %}">
+                    <div class="day-number">{{ day.day }}</div>
+                  </a>
+                {% endif %}
+              </td>
+            {% endwith %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
-
-<!-- カレンダー表 -->
-<table border="1" style="width: 100%; text-align: center;">
-  <tr>
-    {% for day in days %}
-      {% if forloop.counter0|divisibleby:7 %}
-        </tr><tr>
-      {% endif %}
-
-      <td class="calendar-cell">
-        <a href="{% url 'app_calendar:edit_day' year=day.year month=day.month day=day.day %}">
-          <div>{{ day.day }}</div>
-        </a>
-
-        {% if day in record_map %}
-          {% with records=record_map|dictkey:day %}
-            {% for rec in records %}
-              <div class="hover-wrapper">
-                😊<br>{{ rec.weight_record }}kg
-
-                <div class="popup workout-table">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Training No.</th>
-                        <th>部位</th>
-                        <th>トレーニング種別</th>
-                        <th>時間</th>
-                        <th>宅トレ★動画</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for menu in rec.workoutmenu_set.all %}
-                        <tr>
-                          <td>{{ forloop.counter }}</td>
-                          <td>{{ menu.video.get_body_part_labels.0 }}</td>
-                          <td>{{ menu.video.get_type_labels.0 }}</td>
-                          <td>{{ menu.video.duration_time }}</td>
-                          <td>
-                            <iframe width="120" height="70" src="{{ menu.video.get_embed_url }}" frameborder="0" allowfullscreen></iframe>
-                          </td>
-                        </tr>
-                      {% empty %}
-                        <tr><td colspan="5">運動メニューがありません</td></tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            {% endfor %}
-          {% endwith %}
-        {% endif %}
-      </td>
-    {% endfor %}
-  </tr>
-</table>
 {% endblock %}
