@@ -53,17 +53,24 @@ body {
     padding: 20px 10px; /* 余白を少し減らしてスマホに対応 */
   }
 
-  .navbar {
-    flex-direction: column;        /* 縦並びに変更 */
-    align-items: flex-start;       /* 左寄せに */
-  }
-
-  .navbar a {
-    margin-bottom: 8px;            /* リンク同士の間隔を広げる */
-  }
-
   .centered-page {
     padding: 20px;
     min-height: auto;              /* 画面サイズが狭いときは高さ制限なし */
+  }
+
+  .navbar {
+    flex-direction: column;       /* 縦並びに変更 */
+    align-items: flex-start;      /* 左寄せにする */
+  }
+
+  .navbar-right {
+    justify-content: flex-start;  /* 右側リンクも左寄せにする */
+    margin-top: 10px;             /* HOMEと間隔を空ける */
+  }
+
+  .navbar a {
+    width: 100%;                  /* 幅いっぱいにしてスマホでも押しやすく */
+    padding: 12px; /* スマホで見やすいように */
+    font-size: 18px;
   }
 }

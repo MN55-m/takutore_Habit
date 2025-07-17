@@ -4,13 +4,10 @@
 
 /*  全体のフォントとリセット */
 body {
-  background-image: url("/static/images/background.png"); /* 背景画像のパス */
-  background-size: cover;       /* 画面全体に拡大 */
-  background-repeat: no-repeat; /* 繰り返しなし */
-  background-position: center;  /* 中央配置 */
   font-family: 'Helvetica', 'Arial', sans-serif;
-  margin: 0;  /* 全体の余白をリセット */
-  padding: 0; /* 全体の余白をリセット */
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5; /* 背景を薄グレーにして柔らかい印象に */
   color: #333; /* 文字色は濃いグレーで読みやすく */
 }
 
@@ -52,25 +49,28 @@ body {
    レスポンシブ対応（スマホ・タブレット）
    ================================ */
 @media (max-width: 768px) {
-  body {
-    background-attachment: fixed; /* PCでだけ固定背景にする */
-  }
-
   .content {
     padding: 20px 10px; /* 余白を少し減らしてスマホに対応 */
-  }
-
-  .navbar {
-    flex-direction: column;        /* 縦並びに変更 */
-    align-items: flex-start;       /* 左寄せに */
-  }
-
-  .navbar a {
-    margin-bottom: 8px;            /* リンク同士の間隔を広げる */
   }
 
   .centered-page {
     padding: 20px;
     min-height: auto;              /* 画面サイズが狭いときは高さ制限なし */
+  }
+
+  .navbar {
+    flex-direction: column;       /* 縦並びに変更 */
+    align-items: flex-start;      /* 左寄せにする */
+  }
+
+  .navbar-right {
+    justify-content: flex-start;  /* 右側リンクも左寄せにする */
+    margin-top: 10px;             /* HOMEと間隔を空ける */
+  }
+
+  .navbar a {
+    width: 100%;                  /* 幅いっぱいにしてスマホでも押しやすく */
+    padding: 12px; /* スマホで見やすいように */
+    font-size: 18px;
   }
 }
