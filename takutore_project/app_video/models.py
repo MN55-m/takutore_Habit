@@ -27,7 +27,7 @@ class Video(models.Model):
     }
 
     is_template = models.BooleanField(default=False)  # デフォルト動画フラグ
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # ユーザーと関連付け
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)  # ユーザーと関連付け
     time_category = models.CharField(max_length=100, blank=True, null=True)  # 時間帯
     type_category = models.CharField(max_length=100, blank=True, null=True)  # 種別
     body_part_category = models.CharField(max_length=100, blank=True, null=True)  # 部位

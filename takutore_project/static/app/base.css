@@ -17,6 +17,18 @@ html, body {
 }
 
 /* ================================
+   ページ全体の共通レイアウト枠
+   ================================ */
+.page-wrapper {
+  max-width: 600px;
+  margin: 80px auto 40px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #fdfdfd; /* お好みで */
+  border-radius: 8px;
+}
+
+/* ================================
    コンテンツエリアの共通スタイル
    ================================ */
 .content {
@@ -39,45 +51,46 @@ html, body {
 }
 
 /* ================================
-   ナビゲーションバーのベース調整（補足的）
-   ================================ */
-.navbar {
-  padding: 10px 20px;
-  background-color: #87CEEB;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap;       /* ← wrap を nowrap に変更：折り返さず横並びに */
-  overflow-x: auto;        /* ← はみ出したときに横スクロールを許可 */
-  white-space: nowrap;     /* ← テキストを折り返さず1行表示 */
-  width: 100vw; /* 画面幅いっぱいにする */
-  min-width: max-content; /* 子要素のサイズに合わせてスクロールできるようにする */
-  -webkit-overflow-scrolling: touch;
-}
-
-.navbar a {
-  white-space: nowrap;  /* ← テキストを改行させずに1行で表示 */
-}
-
-/* ================================
    レスポンシブ対応（スマホ・タブレット）
    ================================ */
 @media (max-width: 768px) {
-  body {
-    background-attachment: fixed; /* PCでだけ固定背景にする */
+  html, body {
+    font-size: 14px;
   }
 
+  .page-wrapper,
+  .container,
   .content {
-    width: 100%;                /* 幅100%で伸縮可能 */
-    max-width: 1100px;          /* 最大幅は1100px */
-    margin: 100px auto 0;             /* 中央に配置 */
-    box-sizing: border-box;     /* padding を幅に含める（はみ出し防止） */
-    padding: 20px 10px; /* 余白を少し減らしてスマホに対応 */
+    max-width: 95%;
+    margin: 10px auto;
+    padding: 10px;
   }
 
-  .centered-page {
-    padding: 20px  10px;
-    min-height: auto;              /* 画面サイズが狭いときは高さ制限なし */
+  input, select, textarea {
+    width: 80%;
+    max-width: 300px; /* ← スマホでも入力欄の横幅を制限 */
+    margin: 0 auto;   /* ← 中央寄せ */
+    display: block;   /* ← margin: auto が効くように */
   }
 
+  table {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 60px; /* ← 上に余白を追加 */
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .navbar a {
+    font-size: 12px;
+  }
 }

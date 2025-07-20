@@ -107,3 +107,50 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #316f9e;       /* 少し濃い青に変化 */
 }
+
+@media (max-width: 768px) {
+  /* 編集画面全体を調整 */
+  .edit-container {
+    padding: 12px;
+  }
+
+  .form-group {
+    font-size: 14px;
+  }
+
+  label {
+    font-size: 14px;
+    display: block;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  /* テーブル調整 */
+  .video-table {
+    font-size: 12px;
+    table-layout: fixed;
+    word-break: break-word;
+  }
+
+  .video-table th,
+  .video-table td {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  /* 動画サイズを画面に合わせて縮小 */
+  .video-table iframe {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
+  /* ボタンも調整 */
+  button[type="submit"] {
+    width: 100%;
+    font-size: 16px;
+  }
+}

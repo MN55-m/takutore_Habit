@@ -19,7 +19,8 @@
 <h2>===== {{ timing_display }} =====</h2>
 
 <!-- ▼ 運動メニュー 表形式表示 -->
-<table border="1" style="width: 100%; text-align: center;">
+<div class="table-scroll-wrapper">
+ <table border="1" style="width: 100%; text-align: center;">
     <thead>
         <tr>
             <th>Training No.</th>
@@ -42,8 +43,8 @@
         </tr>
         {% endfor %}
     </tbody>
-</table>
-
+ </table>
+</div>
 <!-- 合計時間 -->
 <p><strong>合計時間：</strong>{{ total_time_minutes }}分（{{ total_time }}秒）</p>
 

@@ -155,18 +155,21 @@ table {
   min-width: 900px;                /* テーブルが狭すぎないように固定幅を設定 */
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
   .search-container form {
     flex-wrap: wrap;        /* 折り返しを許可 */
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
   }
 
   .search-item {
-    flex: 1 1 45%;          /* 画面幅の約半分を指定（2列） */
-    min-width: 120px;
+    flex: 1 1 100%;          /* 画面幅の約半分を指定（2列） */
   }
 
+  .search-item label {
+    min-width: 80px;
+  }
+  
   .search-item input,
   .search-item select,
   .search-item button {

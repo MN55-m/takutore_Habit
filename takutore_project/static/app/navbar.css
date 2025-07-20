@@ -8,26 +8,35 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;  /* ←追加：折り返しを許可 */
   background-color: #87CEEB;
   padding: 10px 20px;
-  font-size: 20px;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100vw;
+  font-size: 18px;
+  width: 100%;
   box-sizing: border-box;
   z-index: 999;
+  top: 0;
+  left: 0;
+  flex-wrap: nowrap;         /* 折り返し禁止 */
+  overflow-x: auto;          /* はみ出したらスクロール */
+  white-space: nowrap;       /* テキストの折り返しも禁止 */
+  -webkit-overflow-scrolling: touch; /* スマホでの滑らかスクロール */
+}
 
-  /* ↓ 重要な追加部分 */
-  overflow-x: auto;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
+/* リンクの共通スタイル */
+.navbar a {
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  padding: 6px 10px;
+  white-space: nowrap; /* ←文字を折り返さない */
 }
 
 .navbar-left,
 .navbar-right {
   display: flex;
-  flex-shrink: 0;
+  flex-wrap: wrap;     /* ←スマホ表示時の折り返し許可 */
+  align-items: center;
   gap: 10px;
 }
 
@@ -40,6 +49,7 @@
     color: black;                     /* 文字色を黒に */
     text-decoration: none;            /* リンクの下線を消す */
     padding: 6px 10px;                /* 内側に余白（クリックしやすく） */
+    white-space: nowrap;  /* ← リンクの改行を禁止（重要） */
 }
 
 /* 右側の各リンクの共通スタイル */
@@ -48,6 +58,7 @@
     color: black;                     /* 黒い文字 */
     text-decoration: none;            /* 下線なし */
     padding: 8px 12px;                /* クリックしやすいよう余白追加 */
+    white-space: nowrap;  /* ← リンクの改行を禁止（重要） */
 }
 
 /* ログアウトリンクだけ、ボタンっぽく見せる */
@@ -68,20 +79,29 @@
    スマホ対応（レスポンシブ対応）
    ========================== */
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;       /* 縦並びに変更 */
-        align-items: flex-start;      /* 左寄せにする */
-        justify-content: flex-start;
-    }
+  .navbar {
+    font-size: 7px;          /* フォントを小さく */
+    padding: 4px 6px;
+    overflow-x: auto;              /* 横スクロール可能にする（保険） */
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    height: 50px; /* スマホ用ナビの高さ */
+  }
 
-    .navbar-right {
-        justify-content: flex-start;  /* 右側リンクも左寄せにする */
-        margin-top: 10px;             /* HOMEと間隔を空ける */
-    }
+  .navbar a {
+    padding: 3px 4px;
+    font-size: 8px;
+  }
 
-    .navbar a {
-        width: 100%;                  /* 幅いっぱいにしてスマホでも押しやすく */
-        padding: 12px; /* スマホで見やすいように */
-        font-size: 18px;
-    }
+  .navbar-left,
+  .navbar-right {
+    flex-wrap: nowrap; /* 横並び維持 */
+    gap: 4px;           /* 間隔狭める */
+  }
+
+  .navbar-right .logout {
+    padding: 3px 6px;
+    font-size: 11px;
+    margin-right: 4px;
+  }
 }

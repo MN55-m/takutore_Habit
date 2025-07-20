@@ -129,3 +129,24 @@ th.saturday {
 th.saturday {
   color: blue;
 }
+
+/* スマホ表示時にカレンダーがはみ出す問題を防ぐ */
+@media (max-width: 768px) {
+  .calendar-table {
+    width: 100%;
+    table-layout: fixed;
+    font-size: 12px;
+  }
+
+  .calendar-table th,
+  .calendar-table td {
+    padding: 4px;
+    font-size: 12px;
+    word-break: break-word;
+  }
+
+  .calendar-table td span,
+  .calendar-table td div {
+    font-size: 11px;
+  }
+}

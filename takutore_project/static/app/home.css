@@ -1,116 +1,150 @@
 /* ======= ホーム画面全体レイアウト（中央寄せ + 幅固定） ======= */
 .home-container {
-  max-width: 800px;         /* コンテンツ全体の最大幅を800pxに固定 */
-  margin: 0 auto;           /* 左右のマージンを自動にして中央寄せ */
-  padding: 20px;            /* コンテンツ内に余白を追加 */
-  text-align: center;       /* テキストを中央揃え */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
 }
 
 /* メインタイトル（h1）の余白調整 */
 .home-container h1 {
-  margin-top: 30px;         /* 上部に30pxの余白 */
-  margin-bottom: 30px;      /* 下部にも余白を空ける */
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-/* ======= 共通のボックススタイル（枠や角の丸み） ======= */
+/* ======= 共通のボックススタイル ======= */
 .info-box {
-  border: 2px solid black;   /* 黒色の太線で囲む */
-  padding: 25px;             /* 内側に余白を設定 */
-  border-radius: 15px;       /* 角を丸くする */
-  margin-bottom: 40px;       /* 下に間隔をあける（次の要素との距離） */
+  border: 2px solid black;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 40px;
 }
 
-/* ======= 日付と現在体重のスタイル ======= */
+/* ======= 日付と現在体重 ======= */
 .today-info .date {
-  font-size: 40px;          /* 日付を大きく表示 */
-  margin-bottom: 10px;      /* 体重との間に余白 */
+  font-size: 32px;
+  margin-bottom: 10px;
 }
 
 .today-info .weight {
-  font-size: 36px;          /* 体重を少し小さめに表示 */
-  color: #000;              /* 黒文字で明確に */
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
 }
 
 /* ======= 適正体重・美容体重の比較エリア ======= */
 .weight-comparison {
-  font-size: 20px;          /* テキストサイズ */
-  display: flex;            /* 横並びに配置 */
-  justify-content: center;  /* コンテンツを中央寄せ */
-  gap: 30px;                /* カード間のスペース */
-  margin-bottom: 30px;      /* 下部に余白を追加 */
-  flex-wrap: wrap;          /* 画面が狭いときに折り返し対応 */
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
-/* 各体重の表示カード（青・ピンク系で動的に背景色変更） */
+/* 各体重の表示カード */
 .weight-card {
-  padding: 10px;            /* 内側の余白 */
-  width: 200px;             /* 幅を統一 */
-  border-radius: 10px;      /* 角を丸くする */
-  text-align: center;       /* テキスト中央揃え */
+  padding: 10px 20px;
+  width: 200px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  text-align: center;
+  box-sizing: border-box;
 }
 
-/* GOAL！達成時の表示スタイル */
 .goal {
-  color: red;               /* 赤色で目立たせる */
-  font-weight: bold;        /* 太字にする */
+  color: red;
+  font-weight: bold;
 }
 
-/* 差分が残っているときの表示（あと〇kg） */
 .remaining {
-  color: green;             /* 成長や目標感を表す緑色に */
+  color: green;
 }
 
-/* ======= カレンダーリンク（大きなボタン風） ======= */
+/* ======= カレンダーリンクボタン ======= */
 .calendar-link-area {
-  margin-top: 30px;         /* 上部にスペースを追加 */
+  margin-top: 30px;
 }
 
 .calendar-link {
-  background-color: #eecfff;      /* 明るいパープル背景 */
-  padding: 36px 120px;            /* 上下左右のパディングでボタン風に */
-  border-radius: 10px;            /* 角を丸くする */
-  text-decoration: none;          /* 下線を消す */
-  font-weight: bold;              /* 文字を太く */
-  color: black;                   /* 文字色は黒 */
-  border: 2px solid black;        /* 枠線でしっかり囲う */
+  background-color: #eecfff;
+  padding: 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  border: 2px solid black;
   display: inline-block;
   width: 80%;
   max-width: 300px;
-  padding: 20px;
   font-size: 1.2rem;
 }
 
 /* ======= 宅トレエリア（WORKOUTのタイトル + ボタン） ======= */
-
-/* 「宅トレ」タイトルのスタイル */
 .workout-title {
-  font-size: 36px;          /* 見出しサイズで大きく表示 */
-  margin-bottom: 20px;      /* タイトル下に余白 */
+  font-size: 36px;
+  margin-bottom: 20px;
 }
 
-/* ボタンを横並びに中央揃え */
 .workout-buttons {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* ← はみ出しを防ぎ、必要なら折り返し */
+  flex-wrap: wrap;
   gap: 20px;
-  box-sizing: border-box;
-  padding: 0 10px; /* スマホ時に端にくっつかないように */
+  padding: 0 10px;
   max-width: 100%;
+  box-sizing: border-box;
 }
 
-/* 宅トレボタン（登録／設定）の共通デザイン */
 .workout-buttons a {
-  background-color: #fca963;       /* オレンジ系の背景色 */
-  padding: 16px 24px;              /* 上下左右の余白を指定 */
-  border-radius: 10px;             /* 丸みのある角 */
-  color: black;                    /* テキストは黒色 */
-  text-decoration: none;          /* 下線を消す */
-  font-weight: bold;              /* 太字にする */
-  border: 2px solid black;        /* 黒枠で強調 */
-  white-space: nowrap;      /* テキストの改行を防ぐ */
-  text-align: center;       /* テキスト中央寄せ */
-  font-size: 16px;          /* フォントサイズを調整 */
-  max-width: 100%;          /* ボタンがはみ出さないように */
-  box-sizing: border-box;   /* paddingを含めて調整 */
+  background-color: #fca963;
+  padding: 16px 24px;
+  border-radius: 10px;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid black;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 16px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ======= レスポンシブ対応（スマホ） ======= */
+@media screen and (max-width: 480px) {
+  .today-info .date {
+    font-size: 24px;
+  }
+
+  .today-info .weight {
+    font-size: 22px;
+  }
+
+  .weight-comparison {
+    flex-direction: row;     /* スマホでも横並び */
+    flex-wrap: wrap;         /* 必要に応じて折り返し */
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .weight-card {
+    width: 45%;              /* スマホでも2列並べる */
+    min-width: 140px;
+    font-size: 14px;
+  }
+
+  .calendar-link {
+    font-size: 1rem;
+    padding: 14px;
+  }
+
+  .workout-title {
+    font-size: 28px;
+  }
+
+  .workout-buttons a {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
 }

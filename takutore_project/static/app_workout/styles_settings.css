@@ -3,8 +3,8 @@ body {
     margin: 20px;
 }
 
-.container {
-    max-width: 600px;
+.workout-form-container {
+    max-width: 100%;
     margin: auto;
     padding: 20px;
     border: 1px solid #ddd;

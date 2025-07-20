@@ -86,3 +86,15 @@ input, select, .select2-container--default .select2-selection--multiple {
 .big-button:hover {
     background-color: #ffeb3b;
 }
+
+/* -----------------------------
+   スマホ対応：テーブルを横スクロール
+----------------------------- */
+.table-scroll-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* iOSでもスムーズ */
+}
+
+.table-scroll-wrapper table {
+    white-space: nowrap;  /* 表の中で改行を防ぐ（セルが縦長にならない） */
+}
