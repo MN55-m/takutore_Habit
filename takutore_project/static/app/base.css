@@ -3,11 +3,16 @@
    ================================ */
 
 /*  全体のフォントとリセット */
-body {
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+  background-image: url("/static/images/background.png"); /* 背景画像のパス */
+  background-size: cover;       /* 画面全体に拡大 */
+  background-repeat: no-repeat; /* 繰り返しなし */
+  background-position: center;  /* 中央配置 */
   font-family: 'Helvetica', 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5; /* 背景を薄グレーにして柔らかい印象に */
+  margin: 0;  /* 全体の余白をリセット */
+  padding: 0; /* 全体の余白をリセット */
   color: #333; /* 文字色は濃いグレーで読みやすく */
 }
 
@@ -17,7 +22,7 @@ body {
 .content {
   width: 100%;                /* 幅100%で伸縮可能 */
   max-width: 1100px;          /* 最大幅は1100px */
-  margin: 0 auto;             /* 中央に配置 */
+  margin: 100px auto 0;             /* 中央に配置 */
   padding: 30px 20px;         /* 上下左右に余白を設ける */
   box-sizing: border-box;     /* padding を幅に含める（はみ出し防止） */
 }
@@ -42,35 +47,37 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap; /* スマホ時に折り返す */
+  flex-wrap: nowrap;       /* ← wrap を nowrap に変更：折り返さず横並びに */
+  overflow-x: auto;        /* ← はみ出したときに横スクロールを許可 */
+  white-space: nowrap;     /* ← テキストを折り返さず1行表示 */
+  width: 100vw; /* 画面幅いっぱいにする */
+  min-width: max-content; /* 子要素のサイズに合わせてスクロールできるようにする */
+  -webkit-overflow-scrolling: touch;
+}
+
+.navbar a {
+  white-space: nowrap;  /* ← テキストを改行させずに1行で表示 */
 }
 
 /* ================================
    レスポンシブ対応（スマホ・タブレット）
    ================================ */
 @media (max-width: 768px) {
+  body {
+    background-attachment: fixed; /* PCでだけ固定背景にする */
+  }
+
   .content {
+    width: 100%;                /* 幅100%で伸縮可能 */
+    max-width: 1100px;          /* 最大幅は1100px */
+    margin: 100px auto 0;             /* 中央に配置 */
+    box-sizing: border-box;     /* padding を幅に含める（はみ出し防止） */
     padding: 20px 10px; /* 余白を少し減らしてスマホに対応 */
   }
 
   .centered-page {
-    padding: 20px;
+    padding: 20px  10px;
     min-height: auto;              /* 画面サイズが狭いときは高さ制限なし */
   }
 
-  .navbar {
-    flex-direction: column;       /* 縦並びに変更 */
-    align-items: flex-start;      /* 左寄せにする */
-  }
-
-  .navbar-right {
-    justify-content: flex-start;  /* 右側リンクも左寄せにする */
-    margin-top: 10px;             /* HOMEと間隔を空ける */
-  }
-
-  .navbar a {
-    width: 100%;                  /* 幅いっぱいにしてスマホでも押しやすく */
-    padding: 12px; /* スマホで見やすいように */
-    font-size: 18px;
-  }
 }

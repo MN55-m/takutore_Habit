@@ -4,21 +4,33 @@
 
 /* ナビゲーションバー全体のレイアウトとスタイル */
 .navbar {
-    position: fixed;
-    display: flex;                     /* 子要素（左右）を横並びにする */
-    justify-content: space-between;   /* 左右にグループを分けて配置する */
-    align-items: center;              /* 縦方向中央揃え */
-    background-color: #87CEEB;        /* ナビゲーションバーの背景色（水色） */
-    padding: 10px 20px;               /* 上下12px、左右16pxの余白 */
-    font-size: 20px;
-    top: 0;
-    left: 0;
-    right: 0;               /* ← 右端まで広げる */
-    width: 100vw;           /* ← viewport幅で固定 */
-    box-sizing: border-box; /* ← paddingを含めてはみ出し防止 */
-    z-index: 999;
-    overflow-x: hidden;     /* ← 横スクロール防止 */
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #87CEEB;
+  padding: 10px 20px;
+  font-size: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  box-sizing: border-box;
+  z-index: 999;
+
+  /* ↓ 重要な追加部分 */
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
 }
+
+.navbar-left,
+.navbar-right {
+  display: flex;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
 
 /* 左側（HOMEリンク）用コンテナ */
 .navbar-left a {
@@ -28,13 +40,6 @@
     color: black;                     /* 文字色を黒に */
     text-decoration: none;            /* リンクの下線を消す */
     padding: 6px 10px;                /* 内側に余白（クリックしやすく） */
-}
-
-/* 右側（カレンダー〜ログアウト）用の全体コンテナ */
-.navbar-right {
-   display: flex;
-   gap: 10px;
-   align-items: center;
 }
 
 /* 右側の各リンクの共通スタイル */
@@ -62,10 +67,11 @@
 /* ==========================
    スマホ対応（レスポンシブ対応）
    ========================== */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
     .navbar {
         flex-direction: column;       /* 縦並びに変更 */
         align-items: flex-start;      /* 左寄せにする */
+        justify-content: flex-start;
     }
 
     .navbar-right {

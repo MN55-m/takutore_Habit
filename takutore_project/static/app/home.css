@@ -90,18 +90,27 @@
 
 /* ボタンを横並びに中央揃え */
 .workout-buttons {
-  display: flex;            /* 横並びに配置 */
-  justify-content: center;  /* 中央揃え */
-  gap: 40px;                /* ボタン間のスペース */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* ← はみ出しを防ぎ、必要なら折り返し */
+  gap: 20px;
+  box-sizing: border-box;
+  padding: 0 10px; /* スマホ時に端にくっつかないように */
+  max-width: 100%;
 }
 
 /* 宅トレボタン（登録／設定）の共通デザイン */
 .workout-buttons a {
   background-color: #fca963;       /* オレンジ系の背景色 */
-  padding: 24px 50px;              /* 上下左右の余白を指定 */
+  padding: 16px 24px;              /* 上下左右の余白を指定 */
   border-radius: 10px;             /* 丸みのある角 */
   color: black;                    /* テキストは黒色 */
   text-decoration: none;          /* 下線を消す */
   font-weight: bold;              /* 太字にする */
   border: 2px solid black;        /* 黒枠で強調 */
+  white-space: nowrap;      /* テキストの改行を防ぐ */
+  text-align: center;       /* テキスト中央寄せ */
+  font-size: 16px;          /* フォントサイズを調整 */
+  max-width: 100%;          /* ボタンがはみ出さないように */
+  box-sizing: border-box;   /* paddingを含めて調整 */
 }

@@ -8,9 +8,8 @@
 {% endblock %}
 
 {% block content %}
-<h2>{{ date|date:"Y年n月j日" }} の編集</h2>
-
 <div class="edit-container">
+  <h1>{{ date|date:"Y年n月j日" }} の編集</h1>
   <form method="post">
     {% csrf_token %}
     
