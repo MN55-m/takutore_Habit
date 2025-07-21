@@ -86,9 +86,10 @@
 /* ポップアップ */
 .popup.workout-table {
   display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 真ん中に配置 */
   background: #fff;
   border: 1px solid #ccc;
   z-index: 100;
@@ -96,7 +97,7 @@
   width: 400px;
   font-size: 12px;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
-}
+ }
 
 /* ホバーで表示 */
 .hover-wrapper:hover .popup.workout-table {
@@ -148,5 +149,15 @@ th.saturday {
   .calendar-table td span,
   .calendar-table td div {
     font-size: 11px;
+  }
+
+  .popup.workout-table {
+    width: 95vw;
+    max-width: 95vw;
+    max-height: 70vh;
+    font-size: 11px;
+    padding: 8px;
+    overflow-x: auto;
+    overflow-y: auto;
   }
 }
