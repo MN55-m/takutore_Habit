@@ -69,6 +69,10 @@
     margin-right: 10px;
 }
 
+.navbar-right .logout:hover {
+   background-color: gray;          /* 背景色は白 */
+}
+
 /* ホバー時（マウスを載せた時）に背景色を変える */
 .navbar-left a:hover,
 .navbar-right a:hover {

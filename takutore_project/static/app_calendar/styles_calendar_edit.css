@@ -93,7 +93,7 @@ textarea {
    保存ボタン
 ---------------------------- */
 button[type="submit"] {
-  background-color: #4682B4;       /* 青色の背景（スチールブルー） */
+  background-color: #007BFF;       /* 青色の背景（スチールブルー） */
   color: white;                    /* 文字は白 */
   border: none;                    /* 枠線なし */
   padding: 10px 20px;              /* 内側余白 */
@@ -105,7 +105,7 @@ button[type="submit"] {
 
 /* ボタンのホバー時 */
 button[type="submit"]:hover {
-  background-color: #316f9e;       /* 少し濃い青に変化 */
+  background-color: #0056b3;       /* 少し濃い青に変化 */
 }
 
 @media (max-width: 768px) {

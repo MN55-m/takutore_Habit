@@ -46,21 +46,22 @@
                     {% for rec in records %}
                       <div class="hover-wrapper">
                         {% if rec.workoutmenu_set.all %}
-                          <!-- ✅ 運動メニューあり：スタンプクリック -->
+                          <!--  運動メニューあり：スタンプクリック -->
                           <a href="{% url 'app_calendar:edit_day' year=day.year month=day.month day=day.day record_id=rec.id %}">
                             <span class="emoji">😊</span>
                           </a><br>
                         {% endif %}
 
                         {% if rec.weight_record %}
-                          <!-- ✅ 体重クリックで編集 -->
+                          <!--  体重クリックで編集 -->
                           <a href="{% url 'app_calendar:edit_day' year=day.year month=day.month day=day.day record_id=rec.id %}" class="weight-link">
-                            {{ rec.weight_record }}kg
+                            <span class="emoji">{{ rec.weight_record }}kg</span>
                           </a>
                         {% endif %}
 
                         {% if rec.workoutmenu_set.all %}
                           <div class="popup workout-table">
+                            <span class="popup-close" onclick="closePopup()">×</span>
                             <table>
                               <thead>
                                 <tr>
@@ -93,7 +94,7 @@
                     {% endfor %}
                   {% endwith %}
                 {% else %}
-                  <!-- ✅ 記録なしなら日付クリック -->
+                  <!--  記録なしなら日付クリック -->
                   <a href="{% url 'app_calendar:edit_day' year=day.year month=day.month day=day.day %}">
                     <div class="day-number">{{ day.day }}</div>
                   </a>
@@ -106,4 +107,16 @@
     </tbody>
   </table>
 </div>
+
+<!-- ★追加: 背景オーバーレイ -->
+<div class="popup-overlay" id="popup-overlay" onclick="closePopup()"></div>
+
+<!-- ★追加: JS -->
+<script>
+function closePopup() {
+  document.querySelectorAll('.popup.workout-table').forEach(el => el.style.display = 'none');
+  document.getElementById('popup-overlay').style.display = 'none';
+}
+</script>
+
 {% endblock %}

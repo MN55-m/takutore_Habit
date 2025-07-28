@@ -52,19 +52,41 @@ input, select, .select2-container--default .select2-selection--multiple {
     margin-top: 20px;
 }
 
+/* 共通ボタン */
 .button {
-    padding: 12px 24px;
-    background-color: rgba(52, 78, 171, 0.59);
+    padding: 10px 20px;
+    background-color: #007BFF;  /* 青系 */
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    min-width: 80px;  /* 最低幅を統一 */
 }
 
+/* ホバー時 */
 .button:hover {
-    background-color: rgba(1, 8, 14, 0.4);
+    background-color: #0056b3;
+    color: black;
+}
+
+/* 閉じるボタン（灰色系で区別） */
+.button-cancel {
+    padding: 10px 20px;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 80px;  /* 最低幅を統一 */
+    background-color: gray;
+}
+
+.button-cancel:hover {
+    background-color: #999;
+    color: black;
 }
 
 .form-group {

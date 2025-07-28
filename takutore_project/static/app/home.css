@@ -80,6 +80,12 @@
   font-size: 1.2rem;
 }
 
+.calendar-link:hover {
+  background-color: #d4a6ff; /* ← 少し濃い紫 */
+  color: white;              /* ← 文字を白にして視認性UP */
+  border-color: #7a42f4;     /* ← 枠線も濃い紫に */
+}
+
 /* ======= 宅トレエリア（WORKOUTのタイトル + ボタン） ======= */
 .workout-title {
   font-size: 36px;
@@ -109,6 +115,11 @@
   font-size: 16px;
   max-width: 100%;
   box-sizing: border-box;
+}
+
+.workout-buttons a:hover {
+  background-color: #e67e22; /* ← 少し濃いオレンジ */
+  color: white;              /* ← 文字を白にすると視認性UP */
 }
 
 /* ======= レスポンシブ対応（スマホ） ======= */

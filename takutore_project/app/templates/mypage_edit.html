@@ -34,9 +34,12 @@
   }
 
   .form-input input {
-    width: 200px;
+    width: 300px;            /*  200px → 300px に拡大 */
     max-width: 100%;
-    padding: 6px;
+    padding: 8px;            /*  余白も少し広げて操作しやすく */
+    font-size: 16px;         /*  文字サイズを大きく */
+    border: 1px solid #ccc;
+    border-radius: 4px;
     box-sizing: border-box;
   }
 
@@ -46,10 +49,18 @@
 
   /* ボタン */
   button {
-    padding: 10px 20px;
+    background-color: #007BFF;  /*  青系に変更 */
+    color: white;               /*  文字色を白に */
+    border: none;
+    padding: 10px 25px;
     font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
+  }
+
+  button:hover {
+    background-color: #0056b3;  /*  ホバー時は濃い青 */
   }
 
   /* レスポンシブ調整：スマホでも横並び維持 */

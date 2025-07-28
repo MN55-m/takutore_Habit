@@ -34,7 +34,7 @@ input, select, .select2-container--default .select2-selection--multiple {
 
 .button {
     padding: 12px 24px;
-    background-color: #4682B4;
+    background-color: #007BFF;
     color: white;
     font-size: 16px;
     border: none;
@@ -44,7 +44,7 @@ input, select, .select2-container--default .select2-selection--multiple {
 }
 
 .button:hover {
-    background-color: rgba(1, 8, 14, 0.4);
+    background-color: #0056b3;
 }
 
 .form-group {

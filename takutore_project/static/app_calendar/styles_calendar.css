@@ -83,6 +83,11 @@
   font-size: 20px;
 }
 
+.emoji:hover {
+  font-size: 20px;
+  background-color:gainsboro;
+}
+
 /* ポップアップ */
 .popup.workout-table {
   display: none;
@@ -129,6 +134,33 @@ th.saturday {
 
 th.saturday {
   color: blue;
+}
+
+/* ×ボタン */
+.popup-close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #666;
+  cursor: pointer;
+}
+
+.popup-close:hover {
+  color: #000;
+}
+
+/* 背景オーバーレイ */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 99;
 }
 
 /* スマホ表示時にカレンダーがはみ出す問題を防ぐ */

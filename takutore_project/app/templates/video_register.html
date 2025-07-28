@@ -43,7 +43,7 @@
         }
         .button {
             padding: 12px 24px;
-            background-color:#4682B4 ;  /* 青色 */
+            background-color:#007BFF ;  /* 青色 */
             color: white;
             font-size: 16px;
             border: none;
@@ -52,7 +52,7 @@
             transition: background-color 0.3s ease;
         }
         .button:hover {
-            background-color:rgba(1, 8, 14, 0.4);  /* 濃い青 */
+            background-color:#0056b3;  /* 濃い青 */
         }
 
          /* チェックボックスをボックス内に配置 */
@@ -66,6 +66,23 @@
         .checkbox-box label {
             margin-left: 5px;
         }
+
+        .select2-container--default .select2-selection--multiple {
+          background: #fff url("data:image/svg+xml;utf8,<svg fill='gray' height='12' width='12' viewBox='0 0 24 24'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 10px center;
+          background-size: 14px;
+          padding-right: 25px;
+          border: 1px solid #aaa;
+        }
+
+        .select2-container--default .select2-selection--multiple {
+          background-color: #f7f7f7;
+          cursor: pointer;
+        }
+
+        .select2-container--default .select2-selection--multiple:hover {
+          border: 1px solid #007BFF;
+        }
+
     </style>
 
     <!-- Select2 CSS & JS 読み込み -->
@@ -141,9 +158,18 @@
     <script>
       $(document).ready(function() {
         // Select2 を適用
-        $('#id_time_category').select2();
-        $('#id_type_category').select2();
-        $('#id_body_part_category').select2();
+        $('#id_time_category').select2({
+          placeholder: "時間帯を選択（複数可） ▼",
+          allowClear: true
+        });
+        $('#id_type_category').select2({
+          placeholder: "トレーニング種別を選択（複数可） ▼",
+          allowClear: true
+        });
+        $('#id_body_part_category').select2({
+          placeholder: "部位を選択（複数可） ▼",
+          allowClear: true
+        });
       });
     </script>
 {% endblock %}

@@ -53,7 +53,7 @@
 }
 
 .search-item button {
-  background-color: rgb(14, 144, 210);
+  background-color: #007BFF;
   color: white;
   border: none;
   cursor: pointer;
@@ -62,6 +62,26 @@
   padding: 6px 12px;
   margin-top: 20px;
 }
+
+.search-item button:hover {
+    background-color: #0056b3;
+}
+
+/*  共通の青系ボタン */
+.btn-blue {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-blue:hover {
+  background-color: #0056b3;
+}
+
 
 .search-title {
   font-weight: bold;
@@ -131,6 +151,10 @@ td.button-cell {
   cursor: pointer;
 }
 
+.edit-btn:hover {
+    background-color: gray;
+}
+
 .delete-btn {
     background-color: red;
     color: white;
@@ -142,6 +166,36 @@ td.button-cell {
 
 .delete-btn:hover {
     background-color: darkred;
+}
+
+/* ===== モーダル削除・キャンセルボタン ===== */
+.modal-btn {
+  width: 100px;             /* ✅ 検索ボタンと同じ幅 */
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 2px solid #000;
+  cursor: pointer;
+}
+
+/* 削除ボタン（赤） */
+.delete-btn-modal {
+  background-color: red;
+  color: white;
+}
+
+.delete-btn-modal:hover {
+  background-color: darkred;
+}
+
+/* キャンセルボタン（グレー） */
+.cancel-btn-modal {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.cancel-btn-modal:hover {
+  background-color: gray;
 }
 
 /* スマホ時のテーブル横スクロール対応 */
