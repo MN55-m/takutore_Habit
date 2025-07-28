@@ -7,9 +7,16 @@ from django.views.decorators.csrf import csrf_exempt
 from app_video.forms import VideoForm  # 作成したフォームをインポート
 from app_video.models import Video  # Videoモデルをインポート
 from django.db.models import Q
+from app_video.utils import ensure_user_has_default_videos
+from django.contrib.auth.decorators import login_required
 
 # Djangoのカスタムユーザー対応（デフォルトのUserモデルを取得）
 User = get_user_model()
+
+@login_required
+def home(request):
+    ensure_user_has_default_videos(request.user)
+    return render(request, 'home.html')
 
 @login_required  # ユーザーがログインしていないとアクセスできないようにする
 
@@ -46,16 +53,16 @@ def video_register(request):
 
 # 動画一覧画面を表示するビュー
 def video_list(request):
-   # 自分の動画 or デフォルト動画だけを表示
-    videos = Video.objects.filter(Q(user=request.user) | Q(is_template=True))
+    #  表示するのは「ユーザー自身の動画」のみ（登録 + コピー）
+    videos = Video.objects.filter(user=request.user, is_template=False)
 
-   # GETパラメータを取得
+    # GETパラメータを取得
     time_categories = request.GET.getlist('time_category')
     type_categories = request.GET.getlist('type_category')
     body_part_categories = request.GET.getlist('body_part_category')
     keyword = request.GET.get('keyword')
 
- # フィルター条件に合わせて絞り込む
+    # フィルター条件に合わせて絞り込む
     if time_categories and 'all' not in time_categories:
         q_time = Q()
         for val in time_categories:
@@ -87,9 +94,8 @@ def video_list(request):
             Q(body_part_category__icontains=keyword)
         )
 
-    # ビューのロジック
+    #  テンプレート動画は表示されず、コピーされた動画と自分の動画だけ表示
     return render(request, 'video_list.html', {'videos': videos})
-
 
 # --- 編集画面 ---
 def video_edit(request, pk):
@@ -108,11 +114,26 @@ def video_edit(request, pk):
 
     return render(request, 'video_edit.html', {'form': form})
 
-# --- 削除画面（ポップアップあり） ---
-@csrf_exempt  # CSRFチェック無効（あとで戻すとよい）
+# ✅ 動画削除（自分の動画のみ削除可、共有テンプレートは削除不可）
+@csrf_exempt
 def video_delete(request, pk):
     if request.method == 'POST':
         video = get_object_or_404(Video, pk=pk)
+        print("削除対象:", video.pk, video.user, video.is_template, "ログインユーザー:", request.user)
+
+        # ✅ 共有テンプレートは削除禁止
+        if video.is_template and video.user is None:
+            print("削除拒否: 共有テンプレート")
+            return JsonResponse({'error': '共有テンプレートは削除できません'}, status=403)
+
+        # ✅ 所有者が一致しない動画も削除禁止
+        if not video.user or video.user != request.user:
+            print("削除拒否: 所有者が一致しません")
+            return JsonResponse({'error': 'この動画は削除できません'}, status=403)
+
+        # ✅ 削除実行
         video.delete()
+        print("削除成功")
         return JsonResponse({'success': True})
+
     return JsonResponse({'error': 'Invalid request'}, status=400)

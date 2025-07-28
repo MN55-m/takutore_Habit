@@ -6,6 +6,12 @@ User = get_user_model()  # カスタムユーザーモデルを取得
 
 #新規アカウント登録
 class SignupForm(UserCreationForm):
+    password1 = forms.CharField(label="password", widget=forms.PasswordInput)
+    password2 = forms.CharField(label="password(確認)", widget=forms.PasswordInput)
+
+    height = forms.FloatField(required=True, label="身長")
+    weight = forms.FloatField(required=True, label="体重")
+
     class Meta:
         model = User  # 対応するモデルを指定
         fields = ["username", "email", "password1", "password2", "height", "weight"] # フォームに表示するフィールドを指定

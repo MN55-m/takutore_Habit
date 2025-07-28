@@ -66,12 +66,45 @@
       background-color: #ddd;
     }
 
+    .btn-blue {
+      background-color: #007BFF;   /* 青系 */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 30px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn-blue:hover {
+      background-color: #0056b3;   /* 濃い青 */
+    }
+
+    .btn-red {
+      background-color: #FF4B4B;   /* 赤系 */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 30px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    .btn-red:hover {
+      background-color: #cc0000;   /* 濃い赤 */
+    }
+
     .note {
       font-size: 12px;
       color: #666;
       margin-top: 10px;
     }
-  </style>
+
+   .error {
+      color: red;
+      font-weight: bold;
+    }
+ </style>
 </head>
 <body>
   <h1>新規登録</h1>
@@ -80,37 +113,50 @@
       {% csrf_token %}
       <div class="form-group">
         <label for="username">ユーザー名</label>
-        <input type="text" name="username">
+        <input type="text" name="username" required>
       </div>
       <div class="form-group">
         <label for="email">mail</label>
-        <input type="email" name="email">
+        <input type="email" name="email" required>
       </div>
       <div class="form-group">
         <label for="password1">password</label>
-        <input type="password" name="password1">
+        <input type="password" name="password1" required>
       </div>
       <div class="form-group">
         <label for="password2">password(確認)</label>
-        <input type="password" name="password2">
+        <input type="password" name="password2" required>
       </div>
       <div class="form-group">
         <label for="height">身長</label>
-        <input type="number" name="height" step="0.1"><span>cm</span>
+        <input type="number" name="height" step="0.1" required><span>cm</span>
       </div>
       <div class="form-group">
         <label for="weight">体重</label>
-        <input type="number" name="weight" step="0.1"><span>kg</span>
+        <input type="number" name="weight" step="0.1" required><span>kg</span>
       </div>
 
       <div class="button-container">
         <a href="{% url 'login' %}">
-          <button type="button">ログイン画面へ戻る</button>
+          <button type="button" class="btn-red">ログイン画面へ戻る</button>
         </a>
-        <button type="submit">登録</button>
+        <button type="submit" class="btn-blue">登録</button>
       </div>
     </form>
-    {{ form.errors }}
+    {% for field in form %}
+        {% if field.errors %}
+            <p class="error">{{ field.label }}</p>   <!-- ラベル名を表示 -->
+            {% for error in field.errors %}
+                <p class="error">{{ error }}</p>     <!-- エラーメッセージを赤字で表示 -->
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
   </div>
 </body>
 </html>

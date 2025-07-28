@@ -33,9 +33,25 @@ class SignupView(View):
         print(request.POST)   # デバッグ用にフォームのデータを表示（不要なら削除可）
         form = SignupForm(request.POST)   #ユーザーが入力したデータを取得
         if form.is_valid():   # ユーザーが入力したデータが正しい形式かチェック
+             # ---- 追加: 身長・体重が入力されているか確認 ----
+            height = form.cleaned_data.get("height")
+            weight = form.cleaned_data.get("weight")
+
+            if height is None:
+                form.add_error("height", "身長は必須項目です。")
+            if weight is None:
+                form.add_error("weight", "体重は必須項目です。")
+
+            # エラーがある場合はフォーム再表示
+            if form.errors:
+                return render(request, "signup.html", {"form": form})
+            
+            # 問題なければユーザー作成・ログイン
             user = form.save()  # 入力されたデータをUserデータベースに保存
             login(request, user)  # 保存したユーザーをログイン状態にする
             return redirect("home")  # # 保存後にホームへリダイレクト
+        
+        # バリデーションエラー時はフォーム再表示
         return render(request, "signup.html", context={
             "form":form  # 入力にエラーがある場合、フォームとエラーを再表示
         })

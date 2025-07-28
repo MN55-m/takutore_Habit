@@ -161,7 +161,7 @@
             // 確認ボタンを押したときの処理
             confirmBtn.addEventListener("click", function() {
                 // Djangoの削除URLにPOSTリクエストを送る
-                fetch(`/takutore_project/home/video/list/delete/${deleteId}/`, {
+                fetch(`/takutore_Habit/home/video/list/delete/${deleteId}/`, {
                     method: "POST",
                     headers: {
                         "X-CSRFToken": "{{ csrf_token }}",  // CSRF対策
